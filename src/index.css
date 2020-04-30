@@ -1,13 +1,40 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto'!important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button:focus {
+  outline: 0!important;
+  border: 0!important;
+}
+
+.bg-resaltado {
+  background-color: #c7c7c7!important;
+}
+
+.text-error {
+  color: #f44336!important;
+}
+
+.material-color-primary {
+  color: #3f51b5!important;
+}
+.material-bg-primary {
+  background-color: #3f51b5!important;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.MuiDialog-paper {
+  margin: 0!important;
+}
+
+.MuiDialog-paperFullWidth {
+  width: 95%!important;
+}
+@media (max-width: 663.95px) {
+  .MuiDialog-paperWidthSm.MuiDialog-paperScrollBody {
+    max-width: none!important;
+  }
 }
