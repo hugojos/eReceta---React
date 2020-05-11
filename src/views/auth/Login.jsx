@@ -1,4 +1,5 @@
 import React from 'react';
+import { Paper } from '@material-ui/core'
 import FormLogin from '../../components/FormLogin'
 
 const Login = () => {
@@ -9,10 +10,12 @@ const Login = () => {
 					<div className="mb-4">
 						<img src="./img/eReceta.png" className="w-100" alt="" />
 						<div className="version mt-3">
-							<span className="h4 mb-0 font-weight-bold text-uppercase">PRo</span>
+							<span className="h4 mb-0 font-weight-bold text-uppercase">{window.properties.version}</span>
 						</div>
 					</div>
-					<FormLogin />
+					<Paper className="pb-2 pt-4" elevation={3}>
+						<FormLogin />
+					</Paper>
 				</div>
 			</div>
 		</div>

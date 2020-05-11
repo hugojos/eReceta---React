@@ -1,10 +1,13 @@
 import axios from 'axios'
+import history from './history'
 //contantes
 const data = {
     pacienteDto: {},
     medicamentoDtos: [],
     firmaDigital: [],
-    receta: []
+    receta: [],
+    loading: false,
+    errorResponse: '',
 }
 
 const AGREGAR_MEDICAMENTO = 'AGREGAR_MEDICAMENTO'
@@ -14,6 +17,9 @@ const AGREGAR_POSOLOGIA = 'AGREGAR_POSOLOGIA'
 const AGREGAR_FIRMA = 'AGREGAR_FIRMA'
 const AGREGAR_PACIENTE = 'AGREGAR_PACIENTE'
 const GENERAR_RECETA = 'GENERAR RECETA'
+const GENERAR_RECETA_EXITO = 'GENERAR_RECETA_EXITO'
+const GENERAR_RECETA_FALLO = 'GENERAR_RECETA_FALLO'
+const RESETEAR = 'RESETEAR'
 
 //reducer
 export default function reducer(state = data, action){
@@ -27,11 +33,17 @@ export default function reducer(state = data, action){
         case AGREGAR_POSOLOGIA:
             return {...state, medicamentoDtos: [...action.payload]}
         case AGREGAR_FIRMA:
-            return {...state, firma: action.payload}
+            return {...state, firmaDigital: action.payload}
         case AGREGAR_PACIENTE:
-            return {...state, paciente: action.payload}
+            return {...state, pacienteDto: action.payload}
         case GENERAR_RECETA:
-            return {...state, receta: action.payload}
+            return {...state, receta:[], errorResponse:'', loading: true}
+        case GENERAR_RECETA_EXITO:
+            return {...state, receta: action.payload, loading: false} 
+        case GENERAR_RECETA_FALLO:
+            return {...state, errorResponse: action.payload, loading: false}
+        case RESETEAR:
+            return {pacienteDto: {},  medicamentoDtos: [], firmaDigital: [], receta: [], loading: false, errorResponse: '',}
         default:
             return state
     }
@@ -83,13 +95,30 @@ export const agregarPacienteAccion = (paciente) => async (dispatch, getState) =>
     })
 }
 
-export const agregarFirmaAccion = (firma) => async (dispatch, getState) => {
-    
+export const resetearAccion = () => async (dispatch, getState) => {
+    dispatch({
+        type: RESETEAR
+    })
 }
 
 export const generarRecetaAccion = (data) => async (dispatch, getState) => {
+    dispatch({
+        type: GENERAR_RECETA
+    })
     await axios.post('http://'+window.properties.ip+'/nuevaReceta', data)
     .then(response => {
-        console.log(response)
+        console.dir(response)
+        dispatch({
+            type: GENERAR_RECETA_EXITO,
+            payload: response.data
+        })
+        history.push('/receta')
+    })
+    .catch(e => {
+        console.dir(e)
+        dispatch({
+            type: GENERAR_RECETA_FALLO,
+            payload: 'No se pudo continuar con el proceso: ' + e.message
+        })
     })
 }

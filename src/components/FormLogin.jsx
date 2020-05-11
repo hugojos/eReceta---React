@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
-import { TextField, Button, InputAdornment, IconButton } from '@material-ui/core'
-//import { Alert } from '@material-ui/lab';
+import { TextField, Button, InputAdornment, IconButton, CircularProgress } from '@material-ui/core'
+import { Alert } from '@material-ui/lab';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Link } from 'react-router-dom'
 
@@ -13,6 +13,8 @@ const FormLogin = (props) => {
     const dispatch = useDispatch()
 
     const loadingLogin = useSelector(state => state.auth.loading)
+
+    const errorResponse = useSelector(state => state.auth.errorResponse)
 
 	const [state, setState] = useState({
 		showPassword: false,
@@ -46,8 +48,8 @@ const FormLogin = (props) => {
             if(!user[key]) 
                 newError[key] = 'El campo no debe estar vacio'
         })
-        setError(newError) 
-        dispatch( iniciarSesionAccion(user) )
+        setError(newError)
+        if(!Object.keys(newError).length) dispatch( iniciarSesionAccion(user) )
     }
     
     return (
@@ -55,12 +57,26 @@ const FormLogin = (props) => {
         onKeyPress={event => event.key == 'Enter' ? validate() : ''}
         action="" className="d-flex justify-content-center text-left">
             <div className="row w-100 justify-content-center">
+                <div className="col-12">
+                    {   !!errorResponse &&
+                        <Alert 
+                        classes={{
+                            message: 'w-100'
+                        }}
+                        severity="error"
+                        className="mb-4">
+                            <div className="d-flex justify-content-center">
+                                <span>{errorResponse}</span>
+                            </div>
+                        </Alert>
+                    }
+                </div>
                 <div className="col-12 form-group">
                     <TextField
                     helperText={error.email}
                     error={error.email != undefined} 
                     onChange={handleInputChange}
-                    type="text"
+                    type="email"
                     fullWidth={true}
                     name="email"
                     label="Email"
@@ -87,20 +103,23 @@ const FormLogin = (props) => {
                             </IconButton>
                         </InputAdornment>,
                     }}/>
-                    <Link to="/recuperar" className="small">Olvide mi contraseña</Link>
+                    <Link to="/recuperar" className="small">Olvidé mi contraseña</Link>
                 </div>
                 <div className="col-12 form-group text-center">
-                    <Button 
-                    size="large" 
-                    color="primary" 
+                    <Button
+                    size="large"
+                    onClick={validate}
                     variant="contained"
-                    endIcon={loadingLogin && <img src="./svg-loaders/tail-spin.svg" style={{width:'20px'}}/>}
-                    onClick={ () => validate() }>
-                    Acceder
+                    color="primary"
+                    startIcon={
+                        loadingLogin &&
+                        <CircularProgress size={20} color="inherit"/>
+                    }>
+                        Acceder
                     </Button>
                 </div>
                 <div className="col-12 text-center">
-                    <span className="small text-muted">¿No tienes cuenta? <Link to="/registrarse"> Registrarse</Link></span>
+                    <span className="small text-muted">¿No tienes cuenta? <Link to="/registrarse"> Regístrate</Link></span>
                 </div>
             </div>
         </form>

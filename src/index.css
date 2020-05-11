@@ -20,7 +20,7 @@ button:focus {
   color: #3f51b5!important;
 }
 .material-bg-primary {
-  background-color: #3f51b5!important;
+  background-color: #2492c6!important;
 }
 .pointer {
   cursor: pointer;
@@ -33,8 +33,29 @@ button:focus {
 .MuiDialog-paperFullWidth {
   width: 95%!important;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
 @media (max-width: 663.95px) {
   .MuiDialog-paperWidthSm.MuiDialog-paperScrollBody {
     max-width: none!important;
   }
+}
+
+.boton-whatsapp-texto {
+  background-color:#4cca5a
+}
+.boton-whatsapp {
+  bottom: 1%;
+  right: 10px;
+  overflow: hidden;
+}
+
+.boton-whatsapp img {
+  width: 50px;
 }

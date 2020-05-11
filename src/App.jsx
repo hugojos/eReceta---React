@@ -1,7 +1,6 @@
-import React, {lazy, Suspense} from 'react';
-/*import Login from './views/auth/Login'
-import NuevaReceta from './views/NuevaReceta'*/
-import TheHeader from './components/TheHeader'
+import React, { lazy, Suspense } from 'react';
+import Header from './components/Header'
+import BotonWhatsapp from './components/BotonWhatsapp'
 import {
   //BrowserRouter as Router,
   Switch,
@@ -16,8 +15,14 @@ import GuestRoute from './router/GuestRoute'
 import generateStore from './redux/store'
 
 const Login = lazy(() => import('./views/auth/Login'));
+const Register = lazy(() => import('./views/auth/Register'));
+const RecoverPassword = lazy(() => import('./views/auth/RecoverPassword'))
+const NewPassword = lazy(() => import('./views/auth/NewPassword'))
+const EmailValidation = lazy(() => import('./views/auth/EmailValidation'))
 const NuevaReceta = lazy(() => import('./views/NuevaReceta'));
-const Firmar = lazy(() => import('./views/Firmar'))
+const Firmar = lazy(() => import('./views/Firmar'));
+const Receta = lazy(() => import('./views/Receta'))
+const Profile = lazy(() => import('./views/user/Profile'))
 
 function App() {
 
@@ -26,7 +31,8 @@ function App() {
   return (
 	<Provider store={store}>
 		<HashRouter>
-			<TheHeader />
+			<Header />
+			<BotonWhatsapp />
 			<div className="vh-100" style={{paddingTop: '45px'}}>
 				<Suspense fallback={
 					<Backdrop open={true}>
@@ -37,13 +43,31 @@ function App() {
 						<GuestRoute path="/iniciar-sesion">
 							<Login />
 						</GuestRoute>
+						<GuestRoute path="/registrarse">
+							<Register />
+						</GuestRoute>
+						<GuestRoute path="/recuperar">
+							<RecoverPassword />
+						</GuestRoute>
+						<GuestRoute path="/nueva-contrasena">
+							<NewPassword />
+						</GuestRoute>
+						<GuestRoute path="/validar">
+							<EmailValidation />
+						</GuestRoute>
 						<Route path="/nueva-receta">
 							<NuevaReceta />
 						</Route>
 						<Route path="/firmar">
 							<Firmar />
 						</Route>
-						<Redirect from="/" to="/iniciar-sesion" exact>
+						<PrivateRoute path="/receta">
+				 			<Receta />
+						</PrivateRoute>
+						<PrivateRoute path="/perfil">
+				 			<Profile />
+						</PrivateRoute>
+						<Redirect from="/" to="/nueva-receta" exact>
 						</Redirect>
 					</Switch>
 				</Suspense>

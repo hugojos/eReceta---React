@@ -1,4 +1,5 @@
 window.properties = {
-    ip:"190.221.61.114:5004/servicio-eReceta/eReceta",
-    version: 'TEST 2.0'
+    ip:"190.221.61.114:5007/servicio-eReceta/eReceta", //JUANJO PUBLICA
+    //ip: "t.eReceta.com.ar/servicio-eReceta/eReceta",
+    version: 'PRO 3.2'
 }

@@ -1,8 +1,10 @@
 import axios from 'axios'
+import history from './history'
 //contantes
 const data = {
-    user: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : {},
+    user: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : false,
     loading: false,
+    errorResponse: ''
 }
 
 const INICIAR_SESION_EXITO = 'INICIAR_SESION_EXITO'
@@ -16,11 +18,12 @@ export default function reducer(state = data, action){
         case INICIAR_SESION_EXITO:
             return {...state, user:  action.payload, loading: false}
         case INICIAR_SESION_FALLO:
-            return {...state, loading: false}
+            return {...state, errorResponse: action.payload,loading: false}
         case INICIAR_SESION:
             return {...state, loading: true}
         case CERRAR_SESION:
-            return {...state, user: {}, loading: false}
+            localStorage.removeItem('auth')
+            return {...state, user: false, loading: false}
         default:
             return state
     }
@@ -34,17 +37,31 @@ export const iniciarSesionAccion = (user) => async (dispatch, getState) => {
     await axios.post('http://'+ window.properties.ip +'/login', user)
             .then(response => {
                 localStorage.setItem('auth', JSON.stringify(response.data))
-                console.log(response)
                 dispatch({
                     type: INICIAR_SESION_EXITO, 
                     payload: response.data
                 })
+                //if(Object.keys(getState().receta.pacienteDto).length) history.push('/receta')
             })  
             .catch(e => {
-                console.dir(e)
-                dispatch({
-                    type: INICIAR_SESION_FALLO
-                })
+                if(e.response && e.response.status == '404') {
+                    dispatch({
+                        type: INICIAR_SESION_FALLO,
+                        payload: '¡Usuario y/o contraseña incorrecto!'
+                    })
+                }
+                else if(e.response && e.response.status == '401') {
+                    dispatch({
+                        type: INICIAR_SESION_FALLO,
+                        payload: 'El usuario aún no ha sido validado con el mail que se le ha enviado'
+                    })
+                } 
+                else {
+                    dispatch({
+                        type: INICIAR_SESION_FALLO,
+                        payload: 'No se pudo continuar con el proceso: '+ e.message
+                    })
+                }
             })
 }
 

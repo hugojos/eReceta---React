@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux'
 
 
 const PrivateRoute = ({ children, ...rest }) => {
-    const isAuth = useSelector(state => state.auth.user)
+    const isAuth = useSelector(state => Object.keys(state.auth.user).length > 0)
     return (
     <Route
       {...rest}
       render={({ location }) =>
-        Object.keys(isAuth).length > 0 ? (
+        isAuth  ? (
           children
         ) : (
           <Redirect
