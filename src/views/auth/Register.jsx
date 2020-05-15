@@ -50,10 +50,9 @@ const Register = () => {
         let name = event.target.name
         let value = event.target.value
         setError({ ...error, [name]: '' })
-        if((name == 'matricula' || name == 'telefono' || name == 'dni') && !/^[0-9]*$/.test(value)) value = ''
+        if((name == 'matricula' || name == 'telefono' || name == 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
         if(name == 'dni' && value.length > 8) value = value.substring(0, 8)
         if(name == 'matricula' && value.length > 6) value = value.substring(0, 6)
-        console.log(value)
         setMedico({
             ...medico,
             [name]: value

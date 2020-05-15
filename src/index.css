@@ -8,6 +8,11 @@ button:focus {
   border: 0!important;
 }
 
+header {
+  background-image: url('./assets/img/download.jpg');
+  background-size: 100%;
+}
+
 .bg-resaltado {
   background-color: #c7c7c7!important;
 }
@@ -21,6 +26,9 @@ button:focus {
 }
 .material-bg-primary {
   background-color: #2492c6!important;
+}
+.material-bg-secondary {
+  background-color: #0057a4;
 }
 .pointer {
   cursor: pointer;
@@ -58,4 +66,9 @@ input[type=number] { -moz-appearance:textfield; }
 
 .boton-whatsapp img {
   width: 50px;
+}
+
+#interactive video {
+  position: absolute;
+  z-index: -10;
 }

@@ -10,6 +10,7 @@ import newPasswordReducer from './newPasswordDuck'
 import emailValidationReducer from './emailValidationDuck'
 import enviarRecetaEmailReducer from './enviarRecetaEmailDuck'
 import enviarRecetaWppReducer from './enviarRecetaWppDuck'
+import modificarDatosReducer from './modificarDatosDuck'
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     newPassword: newPasswordReducer,
     emailValidation: emailValidationReducer,
     enviarRecetaEmail: enviarRecetaEmailReducer,
-    enviarRecetaWpp: enviarRecetaWppReducer
+    enviarRecetaWpp: enviarRecetaWppReducer,
+    modificarDatos: modificarDatosReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

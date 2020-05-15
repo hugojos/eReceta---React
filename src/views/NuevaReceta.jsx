@@ -34,7 +34,7 @@ const NuevaReceta = () => {
 	const handleInputPacienteChange = (event) => {
         let name = event.target.name
         let value = event.target.value
-        if(name == 'dni' && !/^[0-9]*$/.test(value)) value = ''
+        if(name == 'dni' && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
         if(name == 'dni' && value.length > 8) value = value.substring(0, 8)
         setPaciente({
 			...paciente,
@@ -82,7 +82,7 @@ const NuevaReceta = () => {
         <div className="container h-100">
             <div className="row pt-2 justify-content-center">
                 <div className="col-12 col-md-6 text-left">
-                    <span className="text-muted font-weight-bold">Datos del paciente</span>
+                    <span className="font-weight-bold">Datos del paciente</span>
                     <Paper 
                     elevation={4}
                     className="p-2">
@@ -151,7 +151,8 @@ const NuevaReceta = () => {
                         handleBuscador={handleBuscador}
                         error={error.medicamentoDtos}
                         className="col-12 my-3 my-md-0 text-left"/>
-                        <TablaMedicamento />
+                        <TablaMedicamento 
+                        className="col-12 m-auto"/>
                         <div className="col-12 my-2 d-flex flex-column align-items-center">
                             <span className="text-danger small"> </span>
                             <div className="form-group mt-2">

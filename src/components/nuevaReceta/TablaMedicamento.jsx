@@ -7,7 +7,7 @@ import DialogPosologia from './DialogPosologia'
 
 import { sumarCantidadAccion, sacarMedicamentoAccion } from '../../redux/recetaDuck'
 
-const TablaMedicamento = () => {
+const TablaMedicamento = ({className}) => {
 
     const dispatch = useDispatch()
 
@@ -22,9 +22,9 @@ const TablaMedicamento = () => {
     }
 
     return (
-        <div className="col-12 m-auto">
+        <div className={className}>
             <DialogPosologia togglePosologia={togglePosologia} open={open} index={index} />
-            <h2 className="text-muted text-center h6 font-weight-bold">Medicamentos seleccionados ({medicamentoDtos.length})</h2>
+            <h2 className="text-white text-center h6 font-weight-bold">Medicamentos seleccionados ({medicamentoDtos.length})</h2>
             <TableContainer className="border">
                 <Table size="small">
                     <TableHead>
@@ -47,7 +47,7 @@ const TablaMedicamento = () => {
                                     </TableCell>
                                     <TableCell className="px-1 small" align="left">{medicamento.nombre}</TableCell>
                                     <TableCell align="center" className="px-0">
-                                        <div className="d-flex flex-column justify-content-center">
+                                        <div className="p-1 d-flex flex-column justify-content-center">
                                             <div className="d-flex justify-content-between mb-1">
                                                 <IconButton
                                                 onClick={ () => dispatch( sumarCantidadAccion(index, -1) )}

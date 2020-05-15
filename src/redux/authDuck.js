@@ -10,6 +10,7 @@ const data = {
 const INICIAR_SESION_EXITO = 'INICIAR_SESION_EXITO'
 const INICIAR_SESION_FALLO = 'INICIAR_SESION_FALLO'
 const INICIAR_SESION = 'INICIAR_SESION'
+const MODIFICAR_USUARIO = 'MODIFICAR_USUARIO'
 const CERRAR_SESION = 'CERRAR_SESION'
 
 //reducer
@@ -21,6 +22,8 @@ export default function reducer(state = data, action){
             return {...state, errorResponse: action.payload,loading: false}
         case INICIAR_SESION:
             return {...state, loading: true}
+        case MODIFICAR_USUARIO:
+            return {...state, user: action.payload}
         case CERRAR_SESION:
             localStorage.removeItem('auth')
             return {...state, user: false, loading: false}
@@ -63,6 +66,14 @@ export const iniciarSesionAccion = (user) => async (dispatch, getState) => {
                     })
                 }
             })
+}
+
+export const modificarUsuarioAccion = (data) => async (dispatch, getState) => {
+    localStorage.setItem('auth', JSON.stringify(data))
+    dispatch({
+        type: MODIFICAR_USUARIO,
+        payload: data
+    })
 }
 
 export const cerrarSesionAccion = () => async (dispatch, getState) => {

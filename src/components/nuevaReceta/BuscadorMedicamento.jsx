@@ -34,7 +34,7 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
 
     return (
         <div className={className}>
-            <span className="text-muted font-weight-bold">Buscador</span>
+            <span className="font-weight-bold">Buscador</span>
             <TextField
             InputProps={{
                 endAdornment: 
@@ -53,8 +53,8 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
             fullWidth={true}
             variant="outlined"
             placeholder="¿Qué medicamento esta buscando?"
-            helperText="Se buscara a partir de 3 caracteres."
             size="small"/>
+            <span className="text-muted small">Se buscará a partir del tercer caracter ingresado</span>
             <List className="pt-0">
                 {
                     lista.map((medicamento, index) => (

@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { AddAPhoto, Close } from '@material-ui/icons'
 
 const RegisterPhoto = ({handle, value, disabled}) => {
 
     const [error, setError] = useState('')
+
+    useEffect(() => {
+        if(typeof value == 'string')
+            document.getElementById('img-salida').src = 'data:image/png;base64,'+value
+    }, [value])
 
     const convertDataURIToBinary = (dataURI) => {
         let base64_maker = ';base64,'
@@ -47,16 +52,14 @@ const RegisterPhoto = ({handle, value, disabled}) => {
                         <AddAPhoto />
                     </label>
                     <div>
-                        <span className="small text-danger"></span>
-                    </div> 
-                    <div>
                         {   !error ? 
                             <span className="small text-muted">Subir imagen</span>
                             :
-                            <span className="small text-danger">{error}</span>
+                            <span className="small text-error">{error}</span>
                         }
                     </div>
                     <input type="file"
+                    disabled={disabled}
                     onChange={mostrarImagen}
                     className="d-none"
                     id="subir-dni" />
