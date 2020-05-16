@@ -24,6 +24,7 @@ const Menu = (props) => {
                         <ListItem button
                         onClick={ () => {
                             history.push('/perfil')
+                            props.toggleMenu()
                         } }>
                             <ListItemText 
                             primary="MI PERFIL"/>
@@ -42,7 +43,6 @@ const Menu = (props) => {
                                     </div>
                                     <div 
                                     onClick={ () => {
-                                        console.log("hola")
                                         history.push('/registrarse')
                                         props.toggleMenu()
                                     }}
@@ -56,6 +56,7 @@ const Menu = (props) => {
                     <Divider />
                     <ListItem button
                     onClick={ () => {
+                        props.toggleMenu()
                         history.push('/nueva-receta')
                     } }>
                         <ListItemText 
@@ -64,7 +65,10 @@ const Menu = (props) => {
                 </div>
                 {   auth &&    
                     <ListItem 
-                    onClick={() => dispatch( cerrarSesionAccion() )}
+                    onClick={() => {
+                        dispatch( cerrarSesionAccion() )
+                        props.toggleMenu()
+                    }}
                     button>
                         <ListItemText
                         className="d-flex"

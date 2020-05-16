@@ -60,7 +60,7 @@ const NuevaReceta = () => {
 
     const validate = () => {
         setError({})
-        let onlyLetters = /^(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/
+        let onlyLetters = /^[\sA-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[A-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[\s]*$/
         let newError = {}
         if(paciente.dni.length && !(paciente.dni.length >= 7 && paciente.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
         if(paciente.obraSocial.length && !paciente.numeroAfiliado.length) newError.numeroAfiliado = 'El campo no debe estar vacio'

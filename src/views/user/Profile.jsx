@@ -58,7 +58,7 @@ const Profile = () => {
     }
 
     const validate = () => {
-        let onlyLetters = /^[\u00F1A-Za-z _]*[\u00F1A-Za-z][\u00F1A-Za-z _]*$/
+        let onlyLetters = /^[\sA-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[A-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[\s]*$/
         let newError = {}
         let auxMedico = medico
         setError({})
