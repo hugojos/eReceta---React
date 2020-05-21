@@ -33,7 +33,7 @@ export const enviarEmailAccion = (data) => async (dispatch, getState) => {
     dispatch({
         type: ENVIAR_EMAIL
     })
-    await axios.post('http://' + window.properties.ip + '/enviarPDF', data)
+    await axios.post(window.properties.ip + '/enviarPDF', data)
     .then(response => {
         console.log(response)
         dispatch({

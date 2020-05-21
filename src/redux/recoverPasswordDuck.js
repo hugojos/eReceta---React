@@ -32,7 +32,7 @@ export const enviarLinkAccion = (email) => async (dispatch, getState) => {
     dispatch({
         type: ENVIAR_LINK
     })
-    axios.post('http://'+window.properties.ip+'/recuperar-contrasena', {email})
+    axios.post(window.properties.ip+'/recuperar-contrasena', {email})
     .then(response => {
         dispatch({
             type: ENVIAR_LINK_EXITO

@@ -105,7 +105,7 @@ export const generarRecetaAccion = (data) => async (dispatch, getState) => {
     dispatch({
         type: GENERAR_RECETA
     })
-    await axios.post('http://'+window.properties.ip+'/nuevaReceta', data)
+    await axios.post(window.properties.ip+'/nuevaReceta', data)
     .then(response => {
         console.dir(response)
         dispatch({

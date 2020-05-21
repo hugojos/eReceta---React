@@ -35,7 +35,7 @@ export const enviarWhatsappAccion = (data) => async (dispatch, getState) => {
     dispatch({
         type: ENVIAR_WHATSAPP
     })
-    await axios.post('http://' + window.properties.ip  + '/compartirWhatsapp', data)
+    await axios.post(window.properties.ip  + '/compartirWhatsapp', data)
     .then(response => {
         console.log(response)
         dispatch({

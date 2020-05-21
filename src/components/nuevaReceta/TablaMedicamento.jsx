@@ -24,7 +24,7 @@ const TablaMedicamento = ({className}) => {
     return (
         <div className={className}>
             <DialogPosologia togglePosologia={togglePosologia} open={open} index={index} />
-            <h2 className="text-white text-center h6 font-weight-bold">Medicamentos seleccionados ({medicamentoDtos.length})</h2>
+            <h2 className="text-center h6 font-weight-bold">Medicamentos seleccionados ({medicamentoDtos.length})</h2>
             <TableContainer className="border">
                 <Table size="small">
                     <TableHead>

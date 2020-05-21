@@ -37,7 +37,7 @@ export const iniciarSesionAccion = (user) => async (dispatch, getState) => {
     dispatch({
         type: INICIAR_SESION
     })  
-    await axios.post('http://'+ window.properties.ip +'/login', user)
+    await axios.post(window.properties.ip +'/login', user)
             .then(response => {
                 localStorage.setItem('auth', JSON.stringify(response.data))
                 dispatch({

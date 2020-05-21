@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { useLocation } from 'react-router-dom'
 import HeaderMenu from './HeaderMenu'
 import { useSelector } from 'react-redux';
 
@@ -8,7 +9,7 @@ const Header = () => {
 
     const user = useSelector(state => state.auth.user)
 
-    const [openMenu, setOpenMenu] = React.useState(false)
+    const [openMenu, setOpenMenu] = useState(false)
 
     const toggleMenu = () => {
         setOpenMenu(!openMenu)
@@ -36,9 +37,11 @@ const Header = () => {
                             <NombreMedico />
                         }
                     </div>
-                    <div className="col-2 px-0 text-white d-flex flex-column align-items-center justify-content-center">
-                        <img src="img/1.jpg" style={{height: '20px'}} alt=""/>
-                        <span className="" style={{fontSize: '10px', lineHeight:'1.1'}}>{window.properties.version}</span>
+                    <div className="col-2 pl-0 text-white d-flex flex-column align-items-end justify-content-center">
+                        <div className="d-flex align-items-center flex-column text-center">
+                            <img src="img/1.png" style={{width: '20px'}} alt=""/>
+                            <span className="" style={{fontSize: '10px', lineHeight:'1.1'}}>{window.properties.version}</span>
+                        </div>
                     </div>
                 </div>
             </div>

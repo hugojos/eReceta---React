@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
 const GuestRoute = ({ children, ...rest }) => {
     const isAuth = useSelector(state => Object.keys(state.auth.user).length > 0)
+    const Component = rest.component;
+    delete rest.component
     return (
     <Route
       {...rest}
       render={({ location }) =>
         !isAuth ? (
-          children
+          <Component />
         ) : (
           <Redirect
             to={{

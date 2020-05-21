@@ -28,7 +28,7 @@ export default function reducer(state = data, action){
 //acciones
 export const validarEmailAccion = (token) => async (dispatch, getState) => {
     dispatch({type: VALIDAR_EMAIL})
-    await axios.get('http://' + window.properties.ip + '/validar?tokenRecibido='+token)
+    await axios.get(window.properties.ip + '/validar?tokenRecibido='+token)
     .then(response => {
         dispatch({
             type: VALIDAR_EMAIL_EXITO,

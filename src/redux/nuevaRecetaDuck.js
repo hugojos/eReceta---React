@@ -30,7 +30,7 @@ export default function reducer(state = data, action){
 
 //acciones
 export const traerListaObraSocialAccion = () => async (dispatch, getState) => {
-    await axios.post('http://'+ window.properties.ip +'/obrasSociales')
+    await axios.post(window.properties.ip +'/obrasSociales')
             .then(response => {
                 dispatch({
                     type: TRAER_LISTA_OBRA_SOCIAL, 
@@ -40,7 +40,7 @@ export const traerListaObraSocialAccion = () => async (dispatch, getState) => {
 }
 
 export const traerListaMedicamentosAccion = (query) => async (dispatch, getState) => {
-    await axios.post('http://'+ window.properties.ip +'/medicamentos', {
+    await axios.post(window.properties.ip +'/medicamentos', {
         nombre: query,
         descuento:'',
         cantidad:'',

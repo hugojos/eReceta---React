@@ -58,14 +58,9 @@ input[type=number] { -moz-appearance:textfield; }
 .boton-whatsapp-texto {
   background-color:#4cca5a
 }
-.boton-whatsapp {
-  bottom: 1%;
-  right: 10px;
-  overflow: hidden;
-}
 
 .boton-whatsapp img {
-  width: 50px;
+  width: 45px;
 }
 
 #interactive video {

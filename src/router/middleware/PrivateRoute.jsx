@@ -5,12 +5,14 @@ import { useSelector } from 'react-redux'
 
 const PrivateRoute = ({ children, ...rest }) => {
     const isAuth = useSelector(state => Object.keys(state.auth.user).length > 0)
+    const Component = rest.component
+    delete rest.component
     return (
     <Route
       {...rest}
       render={({ location }) =>
         isAuth  ? (
-          children
+          <Component />
         ) : (
           <Redirect
             to={{

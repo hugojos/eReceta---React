@@ -35,7 +35,7 @@ export default function reducer(state = data, action){
 //acciones
 export const registrarAccion = (medico) => async (dispatch, getState) => {
     dispatch({type: REGISTRAR})
-    await axios.post('http://' + window.properties.ip + '/registrar', medico)
+    await axios.post(window.properties.ip + '/registrar', medico)
     .then(response => {
         console.dir(response)
         dispatch({
@@ -55,7 +55,7 @@ export const registrarAccion = (medico) => async (dispatch, getState) => {
 }
 
 export const traerListaProvinciasAccion = () => async (dispatch, getState) => {
-    await axios.post('http://' + window.properties.ip + '/provincias')
+    await axios.post(window.properties.ip + '/provincias')
     .then(response => {
         console.log(response)
         dispatch({

@@ -4,7 +4,7 @@ const Footer = () => {
 
     return (
         <footer className="position-fixed text-center w-100"
-        style={{bottom: '1%'}}>
+        style={{bottom: '0.5%'}}>
             <span>{window.properties.footer}</span>
         </footer>
     )

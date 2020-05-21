@@ -11,7 +11,7 @@ import { enviarWhatsappAccion } from '../redux/enviarRecetaWppDuck'
 
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.1.266/pdf.worker.min.js'
 
-const Receta = () => {
+const Receta = (props) => {
 
     const receta = useSelector(state => state.receta.receta)
     const user = useSelector(state => state.auth.user)
@@ -62,7 +62,12 @@ const Receta = () => {
     useEffect(() => {
         if(whatsapp.okResponse.mensaje) {
             let link = document.createElement('a');
-            link.href = whatsapp.okResponse.mensaje;
+            let mensaje = 'https://api.whatsapp.com/send?text='
+                mensaje += 'Sr/a. Paciente, puede visualizar su receta accediendo a ' + window.location.origin+ "%2F%23%2Fver-receta%2F" + whatsapp.okResponse.mensaje;
+                mensaje += '%0A%0A'
+                mensaje += 'Si desea, puede chequear las farmacias habilitadas en http://farmacias.ereceta.com.ar'
+            link.href = mensaje
+            
             link.target = "_blank"
             link.click();
         }  
@@ -70,7 +75,8 @@ const Receta = () => {
     }, [whatsapp])
 
     useEffect(() => {
-        if(!Object.keys(receta).length) history.push('/nueva-receta')
+        console.log(window.location)
+        //if(!Object.keys(receta).length) history.push('/nueva-receta')
         setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
         return () => {
             dispatch( resetearAccion() )

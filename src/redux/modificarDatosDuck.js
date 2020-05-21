@@ -39,7 +39,7 @@ export const modificarMedicoAccion = (medico) => async (dispatch, getState) => {
     dispatch({
         type: MODIFICAR_MEDICO
     })  
-    await axios.post('http://'+ window.properties.ip +'/guardarDatosMedico', medico)
+    await axios.post(window.properties.ip +'/guardarDatosMedico', medico)
             .then(response => {
                 console.log(response)
                 dispatch({
@@ -57,7 +57,7 @@ export const modificarMedicoAccion = (medico) => async (dispatch, getState) => {
 }
 
 export const traerDatosMedico = (medico) => async (dispatch, getState) => {
-    await axios.post('http://'+ window.properties.ip +'/getDatosMedico', medico)
+    await axios.post(window.properties.ip +'/getDatosMedico', medico)
             .then(response => {
                 dispatch({
                     type: TRAER_DATOS,

@@ -38,7 +38,7 @@ export default function reducer(state = data, action){
 //acciones
 export const verificarTokenAccion = (token) => async (dispatch, getState) => {
     dispatch({type: VERIFICAR_TOKEN})
-    await axios.get('http://' + window.properties.ip + '/recuperar-contrasena/verificar?tokenRecibido='+token)
+    await axios.get(window.properties.ip + '/recuperar-contrasena/verificar?tokenRecibido='+token)
     .then(response => {
         console.log(response)
         dispatch({
@@ -60,7 +60,7 @@ export const verificarTokenAccion = (token) => async (dispatch, getState) => {
 export const cambiarPasswordAccion = (medico) => async (dispatch, getState) => {
     console.log(medico)
     dispatch({type: CAMBIAR_PASSWORD})
-    axios.post('http://' + window.properties.ip + '/recuperar-contrasena/cambiar-contrasena', medico)
+    axios.post(window.properties.ip + '/recuperar-contrasena/cambiar-contrasena', medico)
     .then(response => {
         console.log(response)
         dispatch({

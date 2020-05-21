@@ -25,12 +25,15 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
     useEffect(() => {
         let aux = state.acumuladorAjax.find(ajax => JSON.parse(ajax.config.data).nombre == buscador)
         if(aux) {
-            setLista(aux.data)
+            setLista(aux.data.slice(0,5))
         } else {
             setLista([])
             dispatch( vaciarAcumuladorAccion() )
         }
     }, [state.listaMedicamentos])
+
+    useEffect(() => {
+    }, [])
 
     return (
         <div className={className}>
@@ -48,22 +51,27 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
             }}
             value={buscador}
             error={!!error}
-            onChange={ (event) => handleBuscador(event.target.value) }
+            onChange={ (event) => {
+                event.target.scrollIntoView(true)
+                handleBuscador(event.target.value)
+            } }
             type="text"
             fullWidth={true}
             variant="outlined"
             placeholder="¿Qué medicamento esta buscando?"
             size="small"/>
-            <span className="text-muted small">Se buscará a partir del tercer caracter ingresado</span>
+            {   buscador.length < 3 &&
+                <span className="text-muted small">Se buscará a partir del tercer caracter ingresado</span>
+            }
             <List className="pt-0">
                 {
                     lista.map((medicamento, index) => (
                         <ListItem 
                         key={index} 
                         button 
-                        className={"border-bottom flex-column align-items-start " + (medicamento.lResaltarMedicamento ? "bg-resaltado" : '' )}
+                        className={"border-bottom flex-column align-items-start py-1 " + (medicamento.lResaltarMedicamento ? "bg-resaltado" : '' )}
                         onClick={ () => agregarMedicamento(medicamento) }>
-                            <p className="m-0 font-weight-bolder">{medicamento.nombre} {medicamento.descuento > 0 && <span>- {medicamento.descuento}% de descuento</span> } </p>
+                            <p className="m-0 font-weight-bolder small  ">{medicamento.nombre} {medicamento.descuento > 0 && <span>- {medicamento.descuento}% de descuento</span> } </p>
                             <span className="small">{medicamento.formula}</span>
                         </ListItem>
                     ))

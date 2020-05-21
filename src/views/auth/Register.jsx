@@ -17,8 +17,6 @@ const Register = () => {
     
     let listaProvincias = useSelector(state => state.register.listaProvincias)
 
-    const [idSinProvincia, setIdSinProvincia] = useState({})
-
     const [medico, setMedico] = useState({
         nombre: '',
         apellido: '',
@@ -39,13 +37,6 @@ const Register = () => {
        dispatch( traerListaProvinciasAccion() )
        return () => dispatch( resetearRegisterAccion() )
     },[])
-
-    useEffect(() => {
-        let index = listaProvincias.findIndex(provincia => provincia.nombre == 'SIN PROVINCIA')
-        if(index != -1) {
-            setIdSinProvincia(listaProvincias.splice(index, 1)[0].id)
-        }
-    },[listaProvincias])
 
     const handleInputMedicoChange = (event) => {
         let name = event.target.name
@@ -77,8 +68,8 @@ const Register = () => {
         if(medico.password != medico.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
         if(!(medico.dni.length >= 7 && medico.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
         if(!isEmail.test(medico.email.toLowerCase())) newError.email = 'El email es invalido'
-        if(medico.tipoMatricula == 'PROVINCIAL' && (!medico.idProvincia || medico.idProvincia == idSinProvincia)) newError.idProvincia = 'Debe seleccionar una provincia';
-        if(medico.tipoMatricula == 'NACIONAL') auxMedico.idProvincia = idSinProvincia
+        if(medico.tipoMatricula == 'PROVINCIAL' && medico.idProvincia === 1) newError.idProvincia = 'Debe seleccionar una provincia';
+        if(medico.tipoMatricula == 'NACIONAL') auxMedico.idProvincia = 1
         Object.keys(medico).forEach(key => {
             if((key == 'nombre' || key == 'apellido') && !onlyLetters.test(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
@@ -88,8 +79,8 @@ const Register = () => {
         setError(newError)
         console.log(newError)
         console.log(auxMedico)
-        if(!Object.keys(newError).length)
-            dispatch( registrarAccion( auxMedico ) )
+        /*if(!Object.keys(newError).length)
+            dispatch( registrarAccion( auxMedico ) )*/
     }
 
     return (

@@ -80,7 +80,7 @@ const NuevaReceta = () => {
 
 	return (
         <div className="container h-100">
-            <div className="row pt-2 justify-content-center">
+            <div className="row justify-content-center">
                 <div className="col-12 col-md-6 text-left">
                     <span className="font-weight-bold">Datos del paciente</span>
                     <Paper 
