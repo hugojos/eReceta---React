@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from './history'
 //contantes
 const data = {
     user: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : false,
@@ -47,13 +46,13 @@ export const iniciarSesionAccion = (user) => async (dispatch, getState) => {
                 //if(Object.keys(getState().receta.pacienteDto).length) history.push('/receta')
             })  
             .catch(e => {
-                if(e.response && e.response.status == '404') {
+                if(e.response && e.response.status === '404') {
                     dispatch({
                         type: INICIAR_SESION_FALLO,
                         payload: '¡Usuario y/o contraseña incorrecto!'
                     })
                 }
-                else if(e.response && e.response.status == '401') {
+                else if(e.response && e.response.status === '401') {
                     dispatch({
                         type: INICIAR_SESION_FALLO,
                         payload: 'El usuario aún no ha sido validado con el mail que se le ha enviado'

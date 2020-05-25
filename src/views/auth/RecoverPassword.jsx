@@ -48,7 +48,7 @@ const RecoverPassword = () => {
                 }
                 {   !enviado ?
                     <Paper
-                    onKeyPress={event => event.key == 'Enter' ? validate() : ''}
+                    onKeyPress={event => event.key === 'Enter' ? validate() : ''}
                     action="" className="text-left col-12 col-lg-8 pt-3">
                             <h4 className="text-center">Recuperar contraseña</h4>
                             <p className="text-muted small">Por favor, indiquenos su dirección de correo electrónico para enviarle el enlace para reestablecer su contraseña.</p>

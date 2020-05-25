@@ -17,6 +17,8 @@ const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/Firm
 const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/Receta'))
 const Profile = lazy(() => import( /* webpackChunkName:"Profile" */ '../views/user/Profile'))
 const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/RecetaPaciente'))
+const LibroDigital = lazy(() => import( /* webpackChunkName:"LibroDigital" */ '../views/LibroDigital'))
+const LibroDigitalPdf = lazy(() => import( /* webpackChunkName:"LibroDigitalPdf" */ '../views/LibroDigitalPdf'))
 
 const Routes = () => {
     return ( 
@@ -37,6 +39,8 @@ const Routes = () => {
                 <Route path="/firmar" component={Firmar} />
                 <PrivateRoute path="/receta" component={Receta} />
                 <PrivateRoute path="/perfil" component={Profile} />
+                <PrivateRoute path="/libro-digital" component={LibroDigital} />
+                <PrivateRoute path="/libro-digital-pdf" component={LibroDigitalPdf} />
                 <Redirect from="/" to="/nueva-receta" />
             </Switch>
         </Suspense> 

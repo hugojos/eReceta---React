@@ -28,7 +28,7 @@ const NewPassword = (props) => {
 
     const validate = () => {
         let newError = {}
-        if(password.password != password.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
+        if(password.password !== password.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
         if(!password.password) newError.password = 'El campo no debe estar vacio'
         if(!password.confirmPassword) newError.confirmPassword = 'El campo no debe estar vacio'
         setError(newError)

@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { pdfjs } from 'react-pdf';
 import { Document, Page } from 'react-pdf';
 import { Button, CircularProgress } from '@material-ui/core';
@@ -41,7 +40,7 @@ const Receta = (props) => {
         })
         //if(!Object.keys(receta).length) history.push('/nueva-receta')
         setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
-    },[])
+    },[props.match.params])
 
     return (
         <div className="container h-100">

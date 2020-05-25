@@ -3,7 +3,7 @@ import TablaMedicamento from '../components/nuevaReceta/TablaMedicamento'
 import BuscadorMedicamento from '../components/nuevaReceta/BuscadorMedicamento'
 
 import { FormControl, InputLabel, Select, Button, Paper } from '@material-ui/core'
-import FormInput from '../components/FormInput' 
+import AppInput from '../components/AppInput' 
 
 import { traerListaObraSocialAccion, traerListaMedicamentosAccion, vaciarMedicamentoAccion } from '../redux/nuevaRecetaDuck'
 import { agregarPacienteAccion, resetearAccion } from '../redux/recetaDuck'
@@ -34,8 +34,8 @@ const NuevaReceta = () => {
 	const handleInputPacienteChange = (event) => {
         let name = event.target.name
         let value = event.target.value
-        if(name == 'dni' && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
-        if(name == 'dni' && value.length > 8) value = value.substring(0, 8)
+        if(name === 'dni' && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
+        if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
         setPaciente({
 			...paciente,
 			[name]: value
@@ -66,9 +66,9 @@ const NuevaReceta = () => {
         if(paciente.obraSocial.length && !paciente.numeroAfiliado.length) newError.numeroAfiliado = 'El campo no debe estar vacio'
         if(!medicamentoDtos.length) newError.medicamentoDtos = '¡Debe seleccionar al menos un medicamento!'
         Object.keys(paciente).forEach(key => {
-            if((key == 'nombre' || key == 'apellido') && !onlyLetters.test(paciente[key]))
+            if((key === 'nombre' || key === 'apellido') && !onlyLetters.test(paciente[key]))
                 newError[key] = 'El campo debe contener solo letras'
-            if(!paciente[key] && key != 'dni' && key != 'obraSocial' && key != 'numeroAfiliado')
+            if(!paciente[key] && key !== 'dni' && key !== 'obraSocial' && key !== 'numeroAfiliado')
                 newError[key] = 'El campo no debe estar vacio'
         })
         setError({...newError})
@@ -89,7 +89,7 @@ const NuevaReceta = () => {
                         <form action="" method="POST" className="">
                             <div className="form-group row">
                                 <div className="col-6 col-md-12 pr-1 pr-md-3 mb-md-3 text-left">
-                                    <FormInput 
+                                    <AppInput 
                                     handle={handleInputPacienteChange}
                                     name="nombre"
                                     error={error.nombre}
@@ -97,7 +97,7 @@ const NuevaReceta = () => {
                                     value={paciente.nombre}/>
                                 </div>
                                 <div className="col-6 col-md-12 pl-1 pl-md-3 text-left">
-                                    <FormInput 
+                                    <AppInput 
                                     handle={handleInputPacienteChange}
                                     name="apellido"
                                     error={error.apellido}
@@ -106,7 +106,7 @@ const NuevaReceta = () => {
                                 </div>
                             </div>
                             <div className="form-group text-left">
-                                <FormInput 
+                                <AppInput 
                                 handle={handleInputPacienteChange}
                                 name="dni"
                                 error={error.dni}
@@ -133,7 +133,7 @@ const NuevaReceta = () => {
                             </div>
                             {   paciente.obraSocial &&
                                 <div className="form-group text-left">
-                                    <FormInput 
+                                    <AppInput 
                                     handle={handleInputPacienteChange}
                                     name="numeroAfiliado"
                                     error={error.numeroAfiliado}

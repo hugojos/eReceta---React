@@ -1,12 +1,10 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 
-import { Button, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Divider } from '@material-ui/core'
+import { IconButton, Dialog, DialogContent, DialogTitle, Divider } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import FormLogin from './FormLogin'
-import { useSelector } from 'react-redux'
 
 const DialogLogin = (props) => {
-    const auth = useSelector(state => state.auth.user)
 
     return (
         <Dialog 

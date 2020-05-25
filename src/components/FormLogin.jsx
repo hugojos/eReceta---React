@@ -54,7 +54,7 @@ const FormLogin = (props) => {
     
     return (
         <form 
-        onKeyPress={event => event.key == 'Enter' ? validate() : ''}
+        onKeyPress={event => event.key === 'Enter' ? validate() : ''}
         action="" className="d-flex justify-content-center text-left">
             <div className="row w-100 justify-content-center">
                 <div className="col-12">
@@ -74,7 +74,7 @@ const FormLogin = (props) => {
                 <div className="col-12 form-group">
                     <TextField
                     helperText={error.email}
-                    error={error.email != undefined} 
+                    error={error.email !== undefined} 
                     onChange={handleInputChange}
                     type="email"
                     fullWidth={true}
@@ -85,7 +85,7 @@ const FormLogin = (props) => {
                 <div className="col-12 form-group">
                     <TextField 
                     helperText={error.password}
-                    error={error.password != undefined} 
+                    error={error.password !== undefined} 
                     type={state.showPassword ? 'text' : 'password'}
                     fullWidth={true} 
                     name="password"

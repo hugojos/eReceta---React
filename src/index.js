@@ -1,8 +1,7 @@
+import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
 
 import './index.css';
 import App from './App';

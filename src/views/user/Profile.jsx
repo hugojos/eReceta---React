@@ -4,7 +4,7 @@ import { Alert } from '@material-ui/lab'
 import { useSelector, useDispatch } from 'react-redux'
 import { modificarMedicoAccion, traerDatosMedico, resetearMedicoAccion } from '../../redux/modificarDatosDuck'
 import { modificarUsuarioAccion } from '../../redux/authDuck'
-import FormInput from '../../components/FormInput'
+import AppInput from '../../components/AppInput'
 import RegisterPhoto from '../../components/register/RegisterPhoto'
 
 const Profile = () => {
@@ -42,9 +42,9 @@ const Profile = () => {
         let name = event.target.name
         let value = event.target.value
         setError({ ...error, [name]: '' })
-        if((name == 'matricula' || name == 'telefono' || name == 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
-        if(name == 'dni' && value.length > 8) value = value.substring(0, 8)
-        if(name == 'matricula' && value.length > 6) value = value.substring(0, 6)
+        if((name === 'matricula' || name === 'telefono' || name === 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
+        if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
+        if(name === 'matricula' && value.length > 6) value = value.substring(0, 6)
         setMedico({
             ...medico,
             [name]: value
@@ -65,9 +65,9 @@ const Profile = () => {
         if(medico.matricula.length > 7) newError.matricula = 'La matricula debe contener hasta 7 caracteres'
         if(!(medico.dni.length >= 7 && medico.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
         Object.keys(medico).forEach(key => {
-            if((key == 'nombre' || key == 'apellido') && !onlyLetters.test(medico[key]))
+            if((key === 'nombre' || key === 'apellido') && !onlyLetters.test(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
-            if(medico[key] == '' && key != 'telefono' && key != 'fotoDni') 
+            if(medico[key] === '' && key !== 'telefono' && key !== 'fotoDni') 
                 newError[key] = 'El campo no debe estar vacio'
         })
         setError(newError)
@@ -107,7 +107,7 @@ const Profile = () => {
                             :
                             <>
                             <div className="form-group text-left w-100">
-                                <FormInput 
+                                <AppInput 
                                 error={error.nombre}
                                 name="nombre"
                                 label="Nombre(s)"
@@ -116,7 +116,7 @@ const Profile = () => {
                                 disabled={!modificar}/>
                             </div>
                             <div className="form-group text-left">
-                                <FormInput 
+                                <AppInput 
                                 error={error.apellido}
                                 name="apellido"
                                 label="Apellido(s)"
@@ -128,7 +128,7 @@ const Profile = () => {
                                 <div className="col-7 d-flex align-items-center pr-1 text-left">
                                     <div className="row">
                                         <div className="col-12 form-group">
-                                            <FormInput 
+                                            <AppInput 
                                             error={error.dni}
                                             name="dni"
                                             label="DNI"
@@ -137,7 +137,7 @@ const Profile = () => {
                                             disabled={!modificar}/>
                                         </div>
                                         <div className="col-12">
-                                            <FormInput 
+                                            <AppInput 
                                             error={error.telefono}
                                             name="telefono"
                                             label="Telefono (opcional)"
@@ -164,7 +164,7 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <FormInput 
+                                <AppInput 
                                 error={error.matricula}
                                 name="matricula"
                                 label="Matricula"

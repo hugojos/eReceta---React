@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 
 import { CircularProgress, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Paper, InputLabel, Select, FormHelperText } from '@material-ui/core'
 import { useSelector,useDispatch } from 'react-redux'
 import { traerListaProvinciasAccion, registrarAccion, resetearRegisterAccion } from '../../redux/registerDuck'
 
 import RegisterDialog from '../../components/register/RegisterDialog'
-import FormInput from '../../components/FormInput'
+import AppInput from '../../components/AppInput'
 import RegisterPhoto from '../../components/register/RegisterPhoto'
 
 const Register = () => {
@@ -42,9 +41,9 @@ const Register = () => {
         let name = event.target.name
         let value = event.target.value
         setError({ ...error, [name]: '' })
-        if((name == 'matricula' || name == 'telefono' || name == 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
-        if(name == 'dni' && value.length > 8) value = value.substring(0, 8)
-        if(name == 'matricula' && value.length > 6) value = value.substring(0, 6)
+        if((name === 'matricula' || name === 'telefono' || name === 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
+        if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
+        if(name === 'matricula' && value.length > 6) value = value.substring(0, 6)
         setMedico({
             ...medico,
             [name]: value
@@ -65,22 +64,22 @@ const Register = () => {
         let auxMedico = medico
         setError({})
         if(medico.matricula.length > 7) newError.matricula = 'La matricula debe contener hasta 7 caracteres'
-        if(medico.password != medico.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
+        if(medico.password !== medico.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
         if(!(medico.dni.length >= 7 && medico.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
         if(!isEmail.test(medico.email.toLowerCase())) newError.email = 'El email es invalido'
-        if(medico.tipoMatricula == 'PROVINCIAL' && medico.idProvincia === 1) newError.idProvincia = 'Debe seleccionar una provincia';
-        if(medico.tipoMatricula == 'NACIONAL') auxMedico.idProvincia = 1
+        if(medico.tipoMatricula === 'PROVINCIAL' && medico.idProvincia === 1) newError.idProvincia = 'Debe seleccionar una provincia';
+        if(medico.tipoMatricula === 'NACIONAL') auxMedico.idProvincia = 1
         Object.keys(medico).forEach(key => {
-            if((key == 'nombre' || key == 'apellido') && !onlyLetters.test(medico[key]))
+            if((key === 'nombre' || key === 'apellido') && !onlyLetters.test(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
-            if(medico[key] == '' && key != 'telefono' && key != 'idMedico' && key != 'usaApp' && key != 'idProvincia' && key != 'fotoDni') 
+            if(medico[key] === '' && key !== 'telefono' && key !== 'idMedico' && key !== 'usaApp' && key !== 'idProvincia' && key !== 'fotoDni') 
                 newError[key] = 'El campo no debe estar vacio'
         })
         setError(newError)
         console.log(newError)
         console.log(auxMedico)
-        /*if(!Object.keys(newError).length)
-            dispatch( registrarAccion( auxMedico ) )*/
+        if(!Object.keys(newError).length)
+            dispatch( registrarAccion( auxMedico ) )
     }
 
     return (
@@ -90,7 +89,7 @@ const Register = () => {
                 <div className="col-12 col-md-8 col-lg-6">
                     <Paper className="mt-2 p-3 w-100 text-center" elevation={3}>
                         <div className="form-group text-left w-100">
-                            <FormInput 
+                            <AppInput 
                             error={error.nombre}
                             name="nombre"
                             label="Nombre(s)"
@@ -98,7 +97,7 @@ const Register = () => {
                             value={medico.nombre}/>
                         </div>
                         <div className="form-group text-left">
-                            <FormInput 
+                            <AppInput 
                             error={error.apellido}
                             name="apellido"
                             label="Apellido(s)"
@@ -109,7 +108,7 @@ const Register = () => {
                             <div className="col-7 d-flex align-items-center pr-1 text-left">
                                 <div className="row">
                                     <div className="col-12 form-group">
-                                        <FormInput 
+                                        <AppInput 
                                         error={error.dni}
                                         name="dni"
                                         label="DNI"
@@ -117,7 +116,7 @@ const Register = () => {
                                         value={medico.dni}/>
                                     </div>
                                     <div className="col-12">
-                                        <FormInput 
+                                        <AppInput 
                                         error={error.telefono}
                                         name="telefono"
                                         label="Telefono (opcional)"
@@ -137,7 +136,7 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="form-group">
-                            <FormInput 
+                            <AppInput 
                             error={error.matricula}
                             name="matricula"
                             label="Matricula"
@@ -148,7 +147,7 @@ const Register = () => {
                             <FormLabel className="d-flex align-items-center">Tipo</FormLabel>
                             <RadioGroup className="d-flex flex-row">
                                 <FormControlLabel
-                                checked={medico.tipoMatricula == 'NACIONAL'}
+                                checked={medico.tipoMatricula === 'NACIONAL'}
                                 value="NACIONAL"
                                 control={<Radio />}
                                 name="tipoMatricula"
@@ -167,7 +166,7 @@ const Register = () => {
                             </RadioGroup>
                         </FormControl>
                         {
-                            medico.tipoMatricula == 'PROVINCIAL' &&
+                            medico.tipoMatricula === 'PROVINCIAL' &&
                             <div className="form-group text-left">
                                 <FormControl variant="outlined" fullWidth={true} size="small">
                                     <InputLabel>Provincia</InputLabel>
@@ -191,7 +190,7 @@ const Register = () => {
                             </div>
                         }
                         <div className="form-group text-left">
-                            <FormInput 
+                            <AppInput 
                             error={error.email}
                             name="email"
                             label="Email"
@@ -199,7 +198,7 @@ const Register = () => {
                             value={medico.email}/>
                         </div> 
                         <div className="form-group text-left">
-                            <FormInput 
+                            <AppInput 
                             error={error.password}
                             name="password"
                             label="Contraseña"
@@ -208,7 +207,7 @@ const Register = () => {
                             type="password"/>      
                         </div>
                         <div className="form-group text-left">
-                            <FormInput 
+                            <AppInput 
                             error={error.confirmPassword}
                             name="confirmPassword"
                             label="Confirmar contraseña"

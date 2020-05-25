@@ -2,10 +2,9 @@ import React, {useEffect} from 'react';
 
 import { TextField, Button, Dialog, DialogTitle, Divider, DialogActions, DialogContent, CircularProgress} from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
-import { enviarEmailAccion, resetearAccion } from '../../redux/enviarRecetaEmailDuck'
+import { enviarEmailAccion, resetearAccion } from '../redux/enviarRecetaEmailDuck'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
 
 const DialogEnviarEmail = (props) => {
 
@@ -13,7 +12,7 @@ const DialogEnviarEmail = (props) => {
 
     const dispatch = useDispatch()
 
-    let receta = useSelector(state => state.receta.receta)
+    let libroDigitalPdf = useSelector(state => state.libroDigital.archivo)
     const state = useSelector(state => state.enviarRecetaEmail)
     
     const [email, setEmail] = React.useState('')
@@ -32,9 +31,8 @@ const DialogEnviarEmail = (props) => {
         if(!email.length) newError = 'El campo no debe estar vacio'
         setError(newError)
         if(!newError.length) {
-            receta.email = email
-            console.log(receta)
-            dispatch( enviarEmailAccion(receta) )
+            libroDigitalPdf.email = email
+            dispatch( enviarEmailAccion(libroDigitalPdf) )
         }
     }
 
@@ -69,7 +67,7 @@ const DialogEnviarEmail = (props) => {
                     </Alert> 
                     :
                     <div className="py-4">
-                        <span className="font-weight-bold">Ingrese email del paciente</span>
+                        <span className="font-weight-bold">Ingrese email</span>
                         <TextField
                         helperText={error}
                         error={!!error}
@@ -92,11 +90,11 @@ const DialogEnviarEmail = (props) => {
             <DialogActions className="d-flex justify-content-between">
                 {   state.okResponse ?
                     <Button
-                    onClick={ () => history.push('/nueva-receta') }
+                    onClick={ () => history.push('/libro-digital') }
                     variant="contained"
                     color="primary"
                     size="small">
-                        Generar nueva receta
+                        Generar nuevo libro digital
                     </Button>
                     :
                     <Button
@@ -123,7 +121,7 @@ const DialogEnviarEmail = (props) => {
                             state.loading &&
                             <CircularProgress size={20} color="inherit"/>
                         }>
-                            Enviar receta
+                            Enviar libro digital
                         </Button>
                         :
                         <Button 

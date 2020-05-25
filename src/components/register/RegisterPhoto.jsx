@@ -66,7 +66,7 @@ const RegisterPhoto = ({handle, value, disabled}) => {
                 </div>
             }
             <div className={value ? 'position-relative' : ' d-none'}>
-                <img src="/" id="img-salida" className="border w-100" style={{height:'96px'}}/>
+                <img alt="Foto del registro" src="/" id="img-salida" className="border w-100" style={{height:'96px'}}/>
                 {   !disabled &&
                     <Close
                     onClick={eliminarImagen}

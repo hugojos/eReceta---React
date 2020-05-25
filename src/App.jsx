@@ -15,8 +15,7 @@ function App() {
 	const [mostrar, setMostrar] = useState(true)
 
 	const store = generateStore()
-
-		
+	
 	history.listen((location, action) => {
 		if(history.location.pathname.includes('ver-receta')){
 			setMostrar(false)
@@ -41,7 +40,7 @@ function App() {
 					<Routes />
 				</div>
 				{	mostrar && 	<BotonWhatsapp /> }
-				{ 	mostrar&& <Footer /> }
+				{ 	mostrar && <Footer /> }
 			</HashRouter>	
 		</Provider>
 	);

@@ -79,6 +79,7 @@ const BotonWhatsapp = () => {
             </Dialog>
             <div className="position-fixed d-flex align-items-center boton-whatsapp" style={{...position, zIndex: 2000000}}>
                 <a
+                rel="noopener noreferrer"
                 href={url}
                 target="_blank"
                 className="pointer">

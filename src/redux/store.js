@@ -1,4 +1,4 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import authReducer from './authDuck'
@@ -11,6 +11,7 @@ import emailValidationReducer from './emailValidationDuck'
 import enviarRecetaEmailReducer from './enviarRecetaEmailDuck'
 import enviarRecetaWppReducer from './enviarRecetaWppDuck'
 import modificarDatosReducer from './modificarDatosDuck'
+import libroDigitalReducer from './libroDigitalDuck'
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     emailValidation: emailValidationReducer,
     enviarRecetaEmail: enviarRecetaEmailReducer,
     enviarRecetaWpp: enviarRecetaWppReducer,
-    modificarDatos: modificarDatosReducer
+    modificarDatos: modificarDatosReducer,
+    libroDigital: libroDigitalReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

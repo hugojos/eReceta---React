@@ -3,7 +3,7 @@ import React from 'react';
 import { ReportProblemOutlined } from '@material-ui/icons'
 import { TextField, Tooltip, InputAdornment } from '@material-ui/core'
 
-const FormInput = ({handle, name, error, label, value, type, disabled}) => {
+const AppInput = ({handle, name, error, label, value, type, disabled}) => {
     return (
         <TextField
         disabled={disabled || false}
@@ -29,4 +29,4 @@ const FormInput = ({handle, name, error, label, value, type, disabled}) => {
     )
 }
 
-export default FormInput;
+export default AppInput;

@@ -23,7 +23,7 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
     }
 
     useEffect(() => {
-        let aux = state.acumuladorAjax.find(ajax => JSON.parse(ajax.config.data).nombre == buscador)
+        let aux = state.acumuladorAjax.find(ajax => JSON.parse(ajax.config.data).nombre === buscador)
         if(aux) {
             setLista(aux.data.slice(0,5))
         } else {
@@ -31,9 +31,6 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
             dispatch( vaciarAcumuladorAccion() )
         }
     }, [state.listaMedicamentos])
-
-    useEffect(() => {
-    }, [])
 
     return (
         <div className={className}>

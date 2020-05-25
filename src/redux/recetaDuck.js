@@ -51,7 +51,7 @@ export default function reducer(state = data, action){
 
 //acciones
 export const agregarMedicamentoAccion = (medicamento) => async (dispatch, getState) => {
-    let existe = getState().receta.medicamentoDtos.find(seleccionado => seleccionado.nombre == medicamento.nombre)
+    let existe = getState().receta.medicamentoDtos.find(seleccionado => seleccionado.nombre === medicamento.nombre)
     if(!existe) {
         dispatch({
             type: AGREGAR_MEDICAMENTO, 

@@ -62,6 +62,14 @@ const Menu = (props) => {
                         <ListItemText 
                         primary="GENERAR RECETA"/>
                     </ListItem>
+                    <ListItem button
+                    onClick={ () => {
+                        props.toggleMenu()
+                        history.push('/libro-digital')
+                    } }>
+                        <ListItemText 
+                        primary="LIBRO DIGITAL"/>
+                    </ListItem>
                 </div>
                 {   auth &&    
                     <ListItem 
