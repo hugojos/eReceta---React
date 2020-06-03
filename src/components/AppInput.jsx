@@ -3,7 +3,7 @@ import React from 'react';
 import { ReportProblemOutlined } from '@material-ui/icons'
 import { TextField, Tooltip, InputAdornment } from '@material-ui/core'
 
-const AppInput = ({handle, name, error, label, value, type, disabled}) => {
+const AppInput = ({handle, name, error, label, value, type, disabled, placeholder}) => {
     return (
         <TextField
         disabled={disabled || false}
@@ -21,6 +21,7 @@ const AppInput = ({handle, name, error, label, value, type, disabled}) => {
         onChange={handle}
         fullWidth
         name={name}
+        placeholder={ placeholder || '' }
         label={label || ''}
         variant="outlined" 
         size="small" 

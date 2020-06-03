@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper } from '@material-ui/core'
-import FormLogin from '../../components/FormLogin'
+import FormLogin from '../../../components/FormLogin'
 
 const Login = () => {
 	return (

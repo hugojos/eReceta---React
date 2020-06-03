@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 
 import { CircularProgress, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Paper, InputLabel, Select, FormHelperText } from '@material-ui/core'
 import { useSelector,useDispatch } from 'react-redux'
-import { traerListaProvinciasAccion, registrarAccion, resetearRegisterAccion } from '../../redux/registerDuck'
+import { traerListaProvinciasAccion, registrarAccion, resetearRegisterAccion } from '../../../redux/registerDuck'
 
-import RegisterDialog from '../../components/register/RegisterDialog'
-import AppInput from '../../components/AppInput'
-import RegisterPhoto from '../../components/register/RegisterPhoto'
+import RegisterDialog from './components/RegisterDialog'
+import AppInput from '../../../components/AppInput'
+import RegisterPhoto from './components/RegisterPhoto'
 
 const Register = () => {
 
@@ -23,11 +23,11 @@ const Register = () => {
         telefono: '',
         email: '',
         matricula: '',
-        fotoDni: '',
+        archivoDni: '',
         tipoMatricula: 'NACIONAL',
         password: '',
         confirmPassword: '',
-        idProvincia: 0
+        idProvincia: 1 //SIN PROVINCIA
     })
 
     const [error, setError] = useState({})
@@ -36,6 +36,11 @@ const Register = () => {
        dispatch( traerListaProvinciasAccion() )
        return () => dispatch( resetearRegisterAccion() )
     },[])
+
+    useEffect(() => {
+        if(medico.tipoMatricula === 'PROVINCIAL')
+            setMedico({...medico, idProvincia: 1})
+    }, [medico.tipoMatricula])
 
     const handleInputMedicoChange = (event) => {
         let name = event.target.name
@@ -53,7 +58,7 @@ const Register = () => {
     const handleMedicoPhoto = (value) => {
         setMedico({
             ...medico,
-            fotoDni: value
+            archivoDni: value
         })
     }
 
@@ -67,12 +72,12 @@ const Register = () => {
         if(medico.password !== medico.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
         if(!(medico.dni.length >= 7 && medico.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
         if(!isEmail.test(medico.email.toLowerCase())) newError.email = 'El email es invalido'
-        if(medico.tipoMatricula === 'PROVINCIAL' && medico.idProvincia === 1) newError.idProvincia = 'Debe seleccionar una provincia';
+        if(medico.tipoMatricula === 'PROVINCIAL' && medico.idProvincia == 1) newError.idProvincia = 'Debe seleccionar una provincia';
         if(medico.tipoMatricula === 'NACIONAL') auxMedico.idProvincia = 1
         Object.keys(medico).forEach(key => {
             if((key === 'nombre' || key === 'apellido') && !onlyLetters.test(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
-            if(medico[key] === '' && key !== 'telefono' && key !== 'idMedico' && key !== 'usaApp' && key !== 'idProvincia' && key !== 'fotoDni') 
+            if(medico[key] === '' && key !== 'telefono' && key !== 'idMedico' && key !== 'usaApp' && key !== 'idProvincia' && key !== 'archivoDni') 
                 newError[key] = 'El campo no debe estar vacio'
         })
         setError(newError)
@@ -86,6 +91,9 @@ const Register = () => {
         <div className="container">
             <RegisterDialog message={state.okResponse} />
             <div className="row justify-content-center align-items-center">
+                <div className="col-12 text-center">
+                    <h1 className="h2">Registro de usuario</h1>
+                </div>
                 <div className="col-12 col-md-8 col-lg-6">
                     <Paper className="mt-2 p-3 w-100 text-center" elevation={3}>
                         <div className="form-group text-left w-100">
@@ -127,12 +135,12 @@ const Register = () => {
                             </div>
                             <div className="col-5 pl-1 text-center">
                                 {
-                                    !medico.fotoDni &&
-                                    <label className="font-weight-bold">Foto DNI</label>
+                                    !medico.archivoDni &&
+                                    <label className="m-0 font-weight-bold">Foto DNI <p className="small m-0 text-muted" style={{lineHeight: 1}}>(opcional)</p> </label>
                                 }
                                 <RegisterPhoto
                                 handle={handleMedicoPhoto}
-                                value={medico.fotoDni} />
+                                value={medico.archivoDni} />
                             </div>
                         </div>
                         <div className="form-group">

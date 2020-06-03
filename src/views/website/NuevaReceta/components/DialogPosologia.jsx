@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
 import { TextField, Button, Dialog, DialogTitle, Divider, DialogActions, DialogContent } from '@material-ui/core'
-import { agregarPosologiaAccion } from '../../redux/recetaDuck'
+import { agregarPosologiaAccion } from '../../../../redux/recetaDuck'
 import { useDispatch, useSelector } from 'react-redux'
 
 const DialogPosologia = (props) => {

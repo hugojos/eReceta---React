@@ -16,7 +16,7 @@ const Header = () => {
 
     const NombreMedico = () => {
         return (
-            <h6 className="pl-2 m-0">BIENVENIDO/A, {user.nombre.split(' ')[0]}</h6>
+            <h6 className="pl-1 m-0">BIENVENIDO/A, {user.nombre.split(' ')[0]}</h6>
         )
     }
 
@@ -24,7 +24,7 @@ const Header = () => {
         <header style={{backgroundColor: '#0057a4', height:'36px', position:'absolute', width: '100%'}}> 
             <div className="h-100 container">
                 <div className="h-100 row">
-                    <div className="col-10 pr-0 text-white d-flex justify-content-start align-items-center">
+                    <div className="col-9 pr-0 text-white d-flex justify-content-start align-items-center">
                         <MenuIcon
                         className="pointer text-white"
                         onClick={toggleMenu}
@@ -34,7 +34,7 @@ const Header = () => {
                             <NombreMedico />
                         }
                     </div> 
-                    <div className="col-2 pl-0 text-white d-flex flex-column align-items-end justify-content-center">
+                    <div className="col-3 pl-0 text-white d-flex flex-column align-items-end justify-content-center">
                         <div className="d-flex align-items-center flex-column text-center">
                             <img src="img/1.png" style={{width: '20px'}} alt=""/>
                             <span className="" style={{fontSize: '10px', lineHeight:'1.1'}}>{window.properties.version}</span>

@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import SignatureCanvas from 'react-signature-canvas'
 import { Button, CircularProgress } from '@material-ui/core'
 import { Alert } from '@material-ui/lab';
-import DialogFirma from '../components/DialogFirma'
-import DialogLogin from '../components/DialogLogin'
+import DialogFirmaVacia from './components/DialogFirmaVacia'
+import DialogLogin from '../../../components/DialogLogin'
 import { useSelector, useDispatch } from 'react-redux'
-import { generarRecetaAccion } from '../redux/recetaDuck';
+import { generarRecetaAccion } from '../../../redux/recetaDuck';
+import { convertDataURIToBinary } from '../../../utils/convert'  
 
 const Firmar = () => {
 
@@ -13,50 +14,37 @@ const Firmar = () => {
 
     let optionsPad = {}
 
-    const auth = useSelector(state => state.auth.user)
+    const user = useSelector(state => state.auth.user)
     const loading = useSelector(state => state.receta.loading)
     const errorResponse = useSelector(state => state.receta.errorResponse)
 
     let data = useSelector(state => state.receta)
 
-    const [openDialogFirma, setOpenDialogFirma] = React.useState(false)
+    const [openDialogFirmaVacia, setOpenDialogFirmaVacia] = React.useState(false)
     const [openDialogLogin, setOpenDialogLogin] = React.useState(false)
 
     useEffect(() => {
-        if(Object.keys(auth).length && !optionsPad.isEmpty()) {
+        if(Object.keys(user).length && !optionsPad.isEmpty()) {
             toggleDialogLogin()
-            data.usuarioMedicoDto = auth
+            data.usuarioMedicoDto = user
             data.firmaDigital = convertDataURIToBinary(optionsPad.toDataURL())
             dispatch( generarRecetaAccion(data) )
         }
-    }, [auth])
+    }, [user])
 
-    const toggleDialogFirma = () => {
-        setOpenDialogFirma(!openDialogFirma)
+    const toggleDialogFirmaVacia = () => {
+        setOpenDialogFirmaVacia(!openDialogFirmaVacia)
     }
 
     const toggleDialogLogin = () => {
         setOpenDialogLogin(!openDialogLogin)
     }
 
-    const convertDataURIToBinary = (dataURI) => {
-        let base64_maker = ';base64,'
-        let base64Index = dataURI.indexOf(base64_maker) + base64_maker.length;
-        let base64 = dataURI.substring(base64Index);
-        let raw = window.atob(base64);
-        let rawLength = raw.length;
-        let array = new Array(new ArrayBuffer(rawLength));
-        for(let i = 0; i < rawLength; i++) {
-            array[i] = raw.charCodeAt(i);
-        }
-        return array;
-    }
-
     const validate = () => {
-        if(optionsPad.isEmpty()) toggleDialogFirma()
-        else if(!Object.keys(auth).length) toggleDialogLogin()
+        if(optionsPad.isEmpty()) toggleDialogFirmaVacia()
+        else if(!Object.keys(user).length) toggleDialogLogin()
         else {
-            data.usuarioMedicoDto = auth
+            data.usuarioMedicoDto = user
             data.firmaDigital = convertDataURIToBinary(optionsPad.toDataURL())
             dispatch( generarRecetaAccion(data) )
         }
@@ -66,7 +54,7 @@ const Firmar = () => {
     return (
         <div className="container h-100">
             <DialogLogin open={openDialogLogin} toggleDialog={toggleDialogLogin} />
-            <DialogFirma open={openDialogFirma} toggleDialog={toggleDialogFirma} />
+            <DialogFirmaVacia open={openDialogFirmaVacia} toggleDialog={toggleDialogFirmaVacia} />
             <div className="row pt-2 justify-content-center">
                 <div className="col-12 col-lg-8 justify-content-center mb-1">
                     <h2 className="h3 m-0 text-center font-weight-bold">Firma digital</h2>
@@ -113,7 +101,7 @@ const Firmar = () => {
                                 loading &&
                                 <CircularProgress size={20} color="inherit"/>
                             }
-                            onClick={ () => validate() }>
+                            onClick={ validate }>
                             Generar receta
                             </Button>
                         </div>

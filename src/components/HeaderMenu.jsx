@@ -1,11 +1,12 @@
 import React from 'react'
 import { Drawer, List, ListItemText, ListItem, Divider } from '@material-ui/core';
+import { Link  } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { cerrarSesionAccion } from '../redux/authDuck'
 import { useHistory } from 'react-router-dom';
 
-const Menu = (props) => {
+const Menu = ({toggleMenu, open}) => {
 
     const dispatch = useDispatch()
 
@@ -15,17 +16,16 @@ const Menu = (props) => {
 
     return (
         <Drawer 
-        open={props.open}
-        ModalProps={{ onBackdropClick: () => props.toggleMenu() }}
+        open={open}
+        ModalProps={{ onBackdropClick: toggleMenu }}
         >
             <List className="m-0 h-100 d-flex flex-column justify-content-between">
                 <div>
                     {   auth ?
                         <ListItem button
-                        onClick={ () => {
-                            history.push('/perfil')
-                            props.toggleMenu()
-                        } }>
+                        component={Link}
+                        to="/perfil"
+                        onClick={ toggleMenu }>
                             <ListItemText 
                             primary="MI PERFIL"/>
                         </ListItem>
@@ -36,7 +36,7 @@ const Menu = (props) => {
                                     <div 
                                     onClick={ () => {
                                         history.push('/iniciar-sesion')
-                                        props.toggleMenu()
+                                        toggleMenu()
                                     }}
                                     className="text-decoration-none pointer col-6 d-flex align-items-center justify-content-center border-right">
                                         <span className="h5 m-0">ACCEDER</span>
@@ -44,7 +44,7 @@ const Menu = (props) => {
                                     <div 
                                     onClick={ () => {
                                         history.push('/registrarse')
-                                        props.toggleMenu()
+                                        toggleMenu()
                                     }}
                                     className="text-decoration-none pointer col-6 d-flex align-items-center justify-content-center border-left">
                                         <span className="h5 m-0">REGISTRO</span>
@@ -55,27 +55,32 @@ const Menu = (props) => {
                     }
                     <Divider />
                     <ListItem button
-                    onClick={ () => {
-                        props.toggleMenu()
-                        history.push('/nueva-receta')
-                    } }>
+                    component={Link}
+                    to="/nueva-receta"
+                    onClick={ toggleMenu }>
                         <ListItemText 
                         primary="GENERAR RECETA"/>
                     </ListItem>
                     <ListItem button
-                    onClick={ () => {
-                        props.toggleMenu()
-                        history.push('/libro-digital')
-                    } }>
+                    component={Link}
+                    to="/libro-digital"
+                    onClick={ toggleMenu }>
                         <ListItemText 
                         primary="LIBRO DIGITAL"/>
                     </ListItem>
+                    {/*<ListItem button
+                    component={Link}
+                    to="/medicos"
+                    onClick={ toggleMenu }>
+                        <ListItemText 
+                        primary="MEDICOS"/>
+                   </ListItem>*/}
                 </div>
                 {   auth &&    
                     <ListItem 
                     onClick={() => {
                         dispatch( cerrarSesionAccion() )
-                        props.toggleMenu()
+                        toggleMenu()
                     }}
                     button>
                         <ListItemText

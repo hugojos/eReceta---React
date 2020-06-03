@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { InputAdornment, Tooltip, List, ListItem, TextField } from '@material-ui/core'
 import { ReportProblemOutlined } from '@material-ui/icons'
 
-import { agregarMedicamentoAccion } from '../../redux/recetaDuck'
-import { vaciarAcumuladorAccion } from '../../redux/nuevaRecetaDuck'
+import { agregarMedicamentoAccion } from '../../../../redux/recetaDuck'
+import { vaciarAcumuladorAccion } from '../../../../redux/nuevaRecetaDuck'
 import { useSelector, useDispatch } from 'react-redux'
 
 const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {

@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { pdfjs, Document, Page } from 'react-pdf';
 import { Button, Menu, MenuItem, CircularProgress } from '@material-ui/core';
-import DialogEnviarReceta from '../components/receta/DialogEnviarReceta'
+import DialogEnviarReceta from './components/DialogEnviarReceta'
 
-import { resetearAccion } from '../redux/enviarRecetaEmailDuck'
-import { enviarWhatsappAccion } from '../redux/enviarRecetaWppDuck' 
+import { resetearAccion } from '../../../redux/enviarRecetaEmailDuck'
+import { enviarWhatsappAccion } from '../../../redux/enviarRecetaWppDuck' 
 
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.1.266/pdf.worker.min.js'
 
@@ -64,7 +64,7 @@ const Receta = (props) => {
             let mensaje = 'https://api.whatsapp.com/send?text='
                 mensaje += 'Sr/a. Paciente, puede visualizar su receta accediendo a ' + window.location.origin+ "%2F%23%2Fver-receta%2F" + whatsapp.okResponse.mensaje;
                 mensaje += '%0A%0A'
-                mensaje += 'Para utilizar los cupones con descuento, por favor chequee las farmacias adheridas en http://farmacias.ereceta.com.ar'
+                mensaje += 'Para utilizar los cupones con descuento, por favor chequee las farmacias adheridas en https://farmacias.ereceta.com.ar'
             link.href = mensaje
             
             link.target = "_blank"

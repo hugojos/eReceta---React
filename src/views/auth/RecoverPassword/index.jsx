@@ -3,7 +3,7 @@ import { Paper, TextField, Button, CircularProgress, InputAdornment, Tooltip } f
 import { Alert } from '@material-ui/lab'
 import { ReportProblemOutlined } from '@material-ui/icons' 
 import { useSelector, useDispatch } from 'react-redux'
-import { enviarLinkAccion } from '../../redux/recoverPasswordDuck'
+import { enviarLinkAccion } from '../../../redux/recoverPasswordDuck'
 import { useHistory } from 'react-router-dom'
 
 const RecoverPassword = () => {

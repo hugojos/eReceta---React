@@ -3,9 +3,9 @@ import { TextField, InputAdornment, IconButton, Button,CircularProgress, Paper }
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { verificarTokenAccion, cambiarPasswordAccion } from '../../redux/newPasswordDuck'
+import { verificarTokenAccion, cambiarPasswordAccion } from '../../../redux/newPasswordDuck'
 
-import DialogNewPassword from '../../components/DialogNewPassword'
+import DialogNewPassword from './components/DialogNewPassword'
 
 const NewPassword = (props) => {
     

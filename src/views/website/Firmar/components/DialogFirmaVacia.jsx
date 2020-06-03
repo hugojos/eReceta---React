@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, IconButton, Dialog, DialogActions, DialogContent, DialogTitle, Divider } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 
-const DialogFirma = (props) => {
+const DialogFirmaVacia = (props) => {
 
     return (
         <Dialog 
@@ -37,4 +37,4 @@ const DialogFirma = (props) => {
 
 }   
 
-export default DialogFirma;
+export default DialogFirmaVacia;

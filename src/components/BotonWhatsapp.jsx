@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dialog, Divider, DialogActions, DialogContent, Button, DialogTitle, IconButton } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import axios from 'axios'
@@ -22,8 +22,8 @@ const BotonWhatsapp = () => {
         })
         if(localStorage.getItem('dialogWhatsapp'))
             setPosition({
-                right: '10px',
-                bottom: '1%'
+                right: '7px',
+                bottom: '4%'
             })
         else toggleDialog()
     }, [])
@@ -33,8 +33,8 @@ const BotonWhatsapp = () => {
         setOpenDialog(!openDialog)
         setPosition({
             transition: 'all 1s',
-            right: '10px',
-            bottom: '1%'
+            right: '7px',
+            bottom: '4%'
         })
     }
 
@@ -64,7 +64,7 @@ const BotonWhatsapp = () => {
                 </DialogTitle>
                 <Divider />
                 <DialogContent className="d-flex flex-column align-items-center p-2 py-0 text-left small">
-    <p className="h4 m-0 text-dark">{window.properties.dialogConsultasPorWhatsapp}</p>
+                    <p className="h4 m-0 text-dark">{window.properties.dialogConsultasPorWhatsapp}</p>
                     <div id="icono" style={{height: '45px', width:'45px'}}></div>
                 </DialogContent>
                 <Divider />

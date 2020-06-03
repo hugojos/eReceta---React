@@ -7,18 +7,21 @@ import GuestRoute from './middleware/GuestRoute'
 import { Switch, Redirect, Route } from 'react-router-dom'
 
 const ValidarCupon = lazy(() => import( /* webpackChunkName:"ValidarCupon" */ '../views/ValidarCupon'))
-const Login = lazy(() => import( /* webpackChunkName:"Login" */ '../views/auth/Login'));
-const Register = lazy(() => import( /* webpackChunkName:"Register" */ '../views/auth/Register'));
-const RecoverPassword = lazy(() => import( /* webpackChunkName:"RecoverPassword" */ '../views/auth/RecoverPassword'))
-const NewPassword = lazy(() => import( /* webpackChunkName:"NewPassword" */ '../views/auth/NewPassword'))
-const EmailValidation = lazy(() => import( /* webpackChunkName:"EmailValidation" */ '../views/auth/EmailValidation'))
-const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '../views/NuevaReceta'));
-const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/Firmar'));
-const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/Receta'))
-const Profile = lazy(() => import( /* webpackChunkName:"Profile" */ '../views/user/Profile'))
-const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/RecetaPaciente'))
+const Login = lazy(() => import( /* webpackChunkName:"Login" */ '../views/auth/Login/index'));
+const Register = lazy(() => import( /* webpackChunkName:"Register" */ '../views/auth/Register/index'));
+const RecoverPassword = lazy(() => import( /* webpackChunkName:"RecoverPassword" */ '../views/auth/RecoverPassword/index'))
+const NewPassword = lazy(() => import( /* webpackChunkName:"NewPassword" */ '../views/auth/NewPassword/index'))
+const EmailValidation = lazy(() => import( /* webpackChunkName:"EmailValidation" */ '../views/auth/EmailValidation/index'))
+const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '../views/website/NuevaReceta/index'));
+const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/website/Firmar/index'));
+const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/website/Receta/index'))
+const Profile = lazy(() => import( /* webpackChunkName:"Profile" */ '../views/user/Profile/index'))
+const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/website/RecetaPaciente/index'))
 const LibroDigital = lazy(() => import( /* webpackChunkName:"LibroDigital" */ '../views/LibroDigital'))
 const LibroDigitalPdf = lazy(() => import( /* webpackChunkName:"LibroDigitalPdf" */ '../views/LibroDigitalPdf'))
+const Medicos = lazy(() => import(/* webpackChunkName: "Medicos" */ '../views/website/Medicos/index'))
+const ModificarMedico = lazy(() => import(/* webpackChunkName: "ModificarMedico" */ '../views/website/ModificarMedico/index'))
+const Home = lazy(() => import(/* webpackChunkName: "Home" */ '../views/website/Home/index'))
 
 const Routes = () => {
     return ( 
@@ -41,7 +44,9 @@ const Routes = () => {
                 <PrivateRoute path="/perfil" component={Profile} />
                 <PrivateRoute path="/libro-digital" component={LibroDigital} />
                 <PrivateRoute path="/libro-digital-pdf" component={LibroDigitalPdf} />
-                <Redirect from="/" to="/nueva-receta" />
+                <PrivateRoute path="/medicos" component={Medicos} />
+                <PrivateRoute path="/modificar-medico" component={ModificarMedico}/>
+                <Route path='/' component={Home}/>
             </Switch>
         </Suspense> 
     );

@@ -36,7 +36,7 @@ const Receta = (props) => {
         axios.post(window.properties.ip + '/compartirWhatsappRuta')
         .then(response => {
             let { nombreArchivo } = props.match.params
-            setUrlPdf( response.data.mensaje + nombreArchivo )
+            setUrlPdf( response.data.mensaje + nombreArchivo + '.pdf') // Se encarnga de armar la url para buscar el archivo pdf
         })
         //if(!Object.keys(receta).length) history.push('/nueva-receta')
         setWidtchContainer(document.getElementById('canvas_container').offsetWidth)

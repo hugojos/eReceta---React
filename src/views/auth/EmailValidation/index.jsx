@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { CircularProgress, Paper } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useHistory, Link } from 'react-router-dom'
-import { validarEmailAccion } from '../../redux/emailValidationDuck'
+import { validarEmailAccion } from '../../../redux/emailValidationDuck'
 
 const EmailValidation = () => {
     

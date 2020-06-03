@@ -5,7 +5,7 @@ import { Close } from '@material-ui/icons'
 
 import { useHistory } from 'react-router-dom';
 
-const DialogFirma = (props) => {
+const DialogFirmaVacia = (props) => {
 
     const history = useHistory()
 
@@ -46,4 +46,4 @@ const DialogFirma = (props) => {
 
 }   
 
-export default DialogFirma;
+export default DialogFirmaVacia;
