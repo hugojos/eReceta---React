@@ -14,9 +14,6 @@ const state = useSelector(state => state.libroDigital)
 
 const auth = useSelector(state => state.auth.user)
 
-
-
-
     var fecha = new Date();
     var dia = fecha.getDate(); 
     var mes = fecha.getMonth() + 1; 
@@ -67,9 +64,13 @@ const auth = useSelector(state => state.auth.user)
         <div className="container h-100">
             <div className="row pt-2 justify-content-center">
                 <div className="col-12 col-md-6 text-left">
-                <h1>LIBRO DIGITAL</h1>
-                <span className="text-muted font-weight-bold">Ingrese el rango de fechas para el cual desea ver las recetas generadas</span>
-                    <form action="" method="POST" className="">
+                    <h1 className="h4">Generación de Libro digital</h1>
+                    <span className="small">
+                        Resolución 696/2020
+                        ARTÍCULO 6°.- A los fines de implementar el presente procedimiento, los profesionales prescriptores deberán habilitar un libro denominado “Libro prescriptor bajo COVID-19”, donde registrarán los datos establecidos en el Anexo I de esta Resolución.
+                    </span>
+                    <form action="" method="POST" className="mt-3">
+                        <span className="text-muted font-weight-bold">Ingrese el rango de fechas para el cual desea ver las recetas generadas</span>
                         <div className="form-group row mt-3">
                             <div className="col-6 col-md-12 pr-1 pr-md-3 mb-md-3 text-left">
                                 <TextField

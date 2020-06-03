@@ -10,7 +10,7 @@ button:focus {
 
 header {
   background-image: url('./assets/img/download.jpg');
-  background-size: 100%;
+  background-size: cover;
 }
 
 .bg-resaltado {

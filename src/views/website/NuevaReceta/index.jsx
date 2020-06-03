@@ -93,6 +93,9 @@ const NuevaReceta = () => {
 	return (
         <div className="container h-100">
             <div className="row justify-content-center">
+                <div className="col-12 text-center">
+                    <h1 className="h4">Generación de receta digital</h1>
+                </div>
                 <div className="col-12 col-md-6 text-left">
                     <span className="font-weight-bold">Datos del paciente</span>
                     <Paciente 
@@ -124,7 +127,7 @@ const NuevaReceta = () => {
                                     <CircularProgress size={20} color="inherit"/>
                                 }
                                 onClick={ validate }>
-                                Siguiente
+                                Generar
                                 </Button>
                             </div>
                         </div>
