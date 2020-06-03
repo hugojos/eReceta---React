@@ -37,12 +37,13 @@ function App() {
 		<Provider store={store}>
 			<HashRouter history={history}>
 				{ mostrar && <Header /> }
-				<div style={{paddingTop: mostrar ? '45px' : 0, minHeight: '100vh'}}>
+				<div style={{paddingTop: mostrar ? '80px' : 0, minHeight: '90vh'}}>
 					<Routes />
 				</div>
 				{ mostrar && <BotonWhatsapp /> }
 				{ mostrar && <Footer /> }
 			</HashRouter>	
+			
 		</Provider>
 	);
 }

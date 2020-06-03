@@ -38,8 +38,8 @@ const Routes = () => {
                 <GuestRoute path="/recuperar" component={RecoverPassword} />
                 <GuestRoute path="/nueva-contrasena" component={NewPassword} />
                 <GuestRoute path="/validar" component={EmailValidation} />
-                <Route path="/nueva-receta" component={NuevaReceta} />
-                <Route path="/firmar" component={Firmar} />
+                <PrivateRoute path="/nueva-receta" component={NuevaReceta} />
+                <PrivateRoute path="/firmar" component={Firmar} />
                 <PrivateRoute path="/receta" component={Receta} />
                 <PrivateRoute path="/perfil" component={Profile} />
                 <PrivateRoute path="/libro-digital" component={LibroDigital} />

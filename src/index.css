@@ -55,6 +55,12 @@ input[type=number] { -moz-appearance:textfield; }
   }
 }
 
+@media (min-width: 768px){
+  .font-size-desktop{
+    font-size: 16px !important;
+  }
+}
+
 .boton-whatsapp-texto {
   background-color:#4cca5a
 }

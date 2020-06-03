@@ -86,8 +86,8 @@ const Register = () => {
         setError(newError)
         console.log(newError)
         console.log(auxMedico)
-        //  if(!Object.keys(newError).length)
-           // dispatch( registrarAccion( auxMedico ) )
+        if(!Object.keys(newError).length)
+            dispatch( registrarAccion( auxMedico ) )
     }
 
     return (
@@ -204,14 +204,14 @@ const Register = () => {
                             <span className="d-block mb-2 text-error">{state.errorResponse}</span>
                         }
                         <div className="form-group d-flex justify-content-between">
-                            <Link 
-                            component={Button}
+                            <Button 
                             to="/"
+                            component={Link}
                             size="large" 
                             color="primary" 
                             variant="outlined">
                             Salir
-                            </Link>
+                            </Button>
                             <Button 
                             size="large" 
                             color="primary" 

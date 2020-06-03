@@ -119,7 +119,7 @@ const FormLogin = (props) => {
                     </Button>
                 </div>
                 <div className="col-12 text-center">
-                    <span className="small text-muted">¿No tienes cuenta? <Link to="/registrarse"> Regístrate</Link></span>
+                    <span className="text-muted" style={{fontSize: '15px'}}>¿No tienes cuenta? <Link to="/registrarse"> Regístrate</Link></span>
                 </div>
             </div>
         </form>

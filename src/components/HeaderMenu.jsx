@@ -22,13 +22,7 @@ const Menu = ({toggleMenu, open}) => {
             <List className="m-0 h-100 d-flex flex-column justify-content-between">
                 <div>
                     {   auth ?
-                        <ListItem button
-                        component={Link}
-                        to="/perfil"
-                        onClick={ toggleMenu }>
-                            <ListItemText 
-                            primary="MI PERFIL"/>
-                        </ListItem>
+                        ''
                         :
                         <ListItem className="mx-0 px-3 row align-items-center pointer" >
                             <div className="col-12">
@@ -53,41 +47,40 @@ const Menu = ({toggleMenu, open}) => {
                             </div>    
                         </ListItem> 
                     }
-                    <Divider />
-                    <ListItem button
-                    component={Link}
-                    to="/nueva-receta"
-                    onClick={ toggleMenu }>
-                        <ListItemText 
-                        primary="GENERAR RECETA"/>
-                    </ListItem>
-                    <ListItem button
-                    component={Link}
-                    to="/libro-digital"
-                    onClick={ toggleMenu }>
-                        <ListItemText 
-                        primary="LIBRO DIGITAL"/>
-                    </ListItem>
-                    {/*<ListItem button
-                    component={Link}
-                    to="/medicos"
-                    onClick={ toggleMenu }>
-                        <ListItemText 
-                        primary="MEDICOS"/>
-                   </ListItem>*/}
+                    
+                    {   auth &&
+                        <div>
+                            <ListItem button
+                            component={Link}
+                            to="/nueva-receta"
+                            onClick={ toggleMenu }>
+                                <ListItemText 
+                                primary="GENERAR RECETA"/>
+                            </ListItem>
+                            <ListItem button
+                            component={Link}
+                            to="/libro-digital"
+                            onClick={ toggleMenu }>
+                                <ListItemText 
+                                primary="LIBRO DIGITAL"/>
+                            </ListItem>
+                            <ListItem button
+                            component="a"
+                            href="https://ereceta.com.ar/recetas/ManualAndroid.pdf"
+                            target="__blank"
+                            onClick={ toggleMenu }>
+                                <ListItemText primary="MANUAL DE USUARIO" />
+                            </ListItem>
+                            {/*<ListItem button
+                                component={Link}
+                                to="/medicos"
+                                onClick={ toggleMenu }>
+                                <ListItemText 
+                                primary="MEDICOS"/>
+                            </ListItem>*/}
+                        </div>
+                    }
                 </div>
-                {   auth &&    
-                    <ListItem 
-                    onClick={() => {
-                        dispatch( cerrarSesionAccion() )
-                        toggleMenu()
-                    }}
-                    button>
-                        <ListItemText
-                        className="d-flex"
-                        primary="CERRAR SESION"/>
-                    </ListItem>
-                }
             </List>
         </Drawer>
     );
