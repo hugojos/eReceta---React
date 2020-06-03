@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 import { CircularProgress, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Paper, InputLabel, Select, FormHelperText } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import { traerListaProvinciasAccion, registrarAccion, resetearRegisterAccion } from '../../../redux/registerDuck'
+
+import { esEmail, sonLetras, sonNumeros } from '../../../utils/validaciones'
 
 import RegisterDialog from './components/RegisterDialog'
 import AppInput from '../../../components/AppInput'
@@ -24,10 +27,10 @@ const Register = () => {
         email: '',
         matricula: '',
         archivoDni: '',
-        tipoMatricula: 'NACIONAL',
+        tipoMatricula: "0",
         password: '',
         confirmPassword: '',
-        idProvincia: 1 //SIN PROVINCIA
+        idProvincia: "0"
     })
 
     const [error, setError] = useState({})
@@ -38,15 +41,18 @@ const Register = () => {
     },[])
 
     useEffect(() => {
-        if(medico.tipoMatricula === 'PROVINCIAL')
-            setMedico({...medico, idProvincia: 1})
-    }, [medico.tipoMatricula])
+        if(medico.idProvincia === "1")
+            setMedico({...medico, tipoMatricula: 1})
+        else
+            setMedico({...medico, tipoMatricula: 2})
+    }, [medico.idProvincia])
 
     const handleInputMedicoChange = (event) => {
         let name = event.target.name
         let value = event.target.value
         setError({ ...error, [name]: '' })
-        if((name === 'matricula' || name === 'telefono' || name === 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
+        if( name === 'idProvincia' ) setError({ ...error, matricula: ''})
+        if((name === 'matricula' || name === 'telefono' || name === 'dni') && !sonNumeros(value)) value = value.substring(0, value.length-1)
         if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
         if(name === 'matricula' && value.length > 6) value = value.substring(0, 6)
         setMedico({
@@ -63,19 +69,16 @@ const Register = () => {
     }
 
     const validate = () => {
-        let isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        let onlyLetters = /^[\sA-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[A-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[\s]*$/
         let newError = {}
         let auxMedico = medico
         setError({})
         if(medico.matricula.length > 7) newError.matricula = 'La matricula debe contener hasta 7 caracteres'
         if(medico.password !== medico.confirmPassword) newError.confirmPassword = 'Las contraseñas no coinciden'
         if(!(medico.dni.length >= 7 && medico.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
-        if(!isEmail.test(medico.email.toLowerCase())) newError.email = 'El email es invalido'
-        if(medico.tipoMatricula === 'PROVINCIAL' && medico.idProvincia == 1) newError.idProvincia = 'Debe seleccionar una provincia';
-        if(medico.tipoMatricula === 'NACIONAL') auxMedico.idProvincia = 1
+        if(!esEmail(medico.email.toLowerCase())) newError.email = 'El email es invalido'
+        if(medico.idTipo === "0" || medico.idProvincia === "0") newError.matricula = 'Debe seleccionar un tipo de matricula';
         Object.keys(medico).forEach(key => {
-            if((key === 'nombre' || key === 'apellido') && !onlyLetters.test(medico[key]))
+            if((key === 'nombre' || key === 'apellido') && !sonLetras.test(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
             if(medico[key] === '' && key !== 'telefono' && key !== 'idMedico' && key !== 'usaApp' && key !== 'idProvincia' && key !== 'archivoDni') 
                 newError[key] = 'El campo no debe estar vacio'
@@ -83,8 +86,8 @@ const Register = () => {
         setError(newError)
         console.log(newError)
         console.log(auxMedico)
-        if(!Object.keys(newError).length)
-            dispatch( registrarAccion( auxMedico ) )
+        //  if(!Object.keys(newError).length)
+           // dispatch( registrarAccion( auxMedico ) )
     }
 
     return (
@@ -143,60 +146,34 @@ const Register = () => {
                                 value={medico.archivoDni} />
                             </div>
                         </div>
-                        <div className="form-group">
-                            <AppInput 
-                            error={error.matricula}
-                            name="matricula"
-                            label="Matricula"
-                            handle={handleInputMedicoChange}
-                            value={medico.matricula}/>
-                        </div>
-                        <FormControl className="d-flex justify-content-between flex-row align-content-center">
-                            <FormLabel className="d-flex align-items-center">Tipo</FormLabel>
-                            <RadioGroup className="d-flex flex-row">
-                                <FormControlLabel
-                                checked={medico.tipoMatricula === 'NACIONAL'}
-                                value="NACIONAL"
-                                control={<Radio />}
-                                name="tipoMatricula"
-                                onChange={handleInputMedicoChange}
-                                label="Nacional"
-                                labelPlacement="end"
-                                />
-                                <FormControlLabel
-                                value="PROVINCIAL"
-                                control={<Radio />}
-                                name="tipoMatricula"
-                                onChange={handleInputMedicoChange}
-                                label="Provincial"
-                                labelPlacement="end"
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                        {
-                            medico.tipoMatricula === 'PROVINCIAL' &&
-                            <div className="form-group text-left">
+                        <div className="form-group row align-items-center">
+                            <div className="col-3 col-md-2">
+                                <span className="text-left small text-muted">Matricula</span>
+                            </div>
+                            <div className="col-4 col-md-5 pl-0 pr-1">
                                 <FormControl variant="outlined" fullWidth={true} size="small">
-                                    <InputLabel>Provincia</InputLabel>
                                     <Select 
-                                    error={!!error.idProvincia}
                                     native
                                     name="idProvincia"
-                                    label="Provincia"
                                     onChange={handleInputMedicoChange}>
-                                    <option value=""></option>
+                                    <option value={0}>Tipo</option>
                                     {
                                         listaProvincias.map(provincia => (
                                             <option value={provincia.id} key={provincia.id}> {provincia.nombre} </option>
                                         ))
                                     }
                                     </Select>
-                                    {   error.idProvincia &&
-                                        <FormHelperText className="text-error">{error.idProvincia}</FormHelperText>
-                                    }
                                 </FormControl> 
                             </div>
-                        }
+                            <div className="col-5 pl-0">
+                                <AppInput 
+                                error={error.matricula}
+                                name="matricula"
+                                label="Matricula"
+                                handle={handleInputMedicoChange}
+                                value={medico.matricula}/>
+                            </div>
+                        </div>
                         <div className="form-group text-left">
                             <AppInput 
                             error={error.email}
@@ -226,6 +203,15 @@ const Register = () => {
                         {   state.errorResponse &&
                             <span className="d-block mb-2 text-error">{state.errorResponse}</span>
                         }
+                        <div className="form-group d-flex justify-content-between">
+                            <Link 
+                            component={Button}
+                            to="/"
+                            size="large" 
+                            color="primary" 
+                            variant="outlined">
+                            Salir
+                            </Link>
                             <Button 
                             size="large" 
                             color="primary" 
@@ -237,6 +223,7 @@ const Register = () => {
                             onClick={validate}>
                             Registrarse
                             </Button>
+                        </div>
                     </Paper>
                 </div>
             </div>
