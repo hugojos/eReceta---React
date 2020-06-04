@@ -10,3 +10,7 @@ export const convertDataURIToBinary = (dataURI) => {
     }
     return array;
 }
+
+export const convertBinaryToDataURI = (binary) => {
+    return btoa(String.fromCharCode.apply(null, binary))
+}

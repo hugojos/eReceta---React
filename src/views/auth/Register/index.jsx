@@ -27,7 +27,7 @@ const Register = () => {
         email: '',
         matricula: '',
         archivoDni: '',
-        tipoMatricula: "0",
+        tipoMatricula: "",
         password: '',
         confirmPassword: '',
         idProvincia: "0"
@@ -42,9 +42,9 @@ const Register = () => {
 
     useEffect(() => {
         if(medico.idProvincia === "1")
-            setMedico({...medico, tipoMatricula: 1})
+            setMedico({...medico, tipoMatricula: "NACIONAL"})
         else
-            setMedico({...medico, tipoMatricula: 2})
+            setMedico({...medico, tipoMatricula: "PROVINCIAL"})
     }, [medico.idProvincia])
 
     const handleInputMedicoChange = (event) => {
@@ -78,7 +78,7 @@ const Register = () => {
         if(!esEmail(medico.email.toLowerCase())) newError.email = 'El email es invalido'
         if(medico.idTipo === "0" || medico.idProvincia === "0") newError.matricula = 'Debe seleccionar un tipo de matricula';
         Object.keys(medico).forEach(key => {
-            if((key === 'nombre' || key === 'apellido') && !sonLetras.test(medico[key]))
+            if((key === 'nombre' || key === 'apellido') && !sonLetras(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
             if(medico[key] === '' && key !== 'telefono' && key !== 'idMedico' && key !== 'usaApp' && key !== 'idProvincia' && key !== 'archivoDni') 
                 newError[key] = 'El campo no debe estar vacio'
@@ -87,7 +87,7 @@ const Register = () => {
         console.log(newError)
         console.log(auxMedico)
         if(!Object.keys(newError).length)
-            dispatch( registrarAccion( auxMedico ) )
+           dispatch( registrarAccion( auxMedico ) )
     }
 
     return (

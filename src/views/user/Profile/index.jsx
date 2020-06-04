@@ -8,6 +8,7 @@ import AppInput from '../../../components/AppInput'
 import RegisterPhoto from '../../auth/Register/components/RegisterPhoto'
 import { sonLetras } from '../../../utils/validaciones'
 import ProfileDialogFirma from './components/ProfileDialogFirma'
+import { convertDataURIToBinary, convertBinaryToDataURI } from '../../../utils/convert'
 
 const Profile = () => {
 
@@ -27,7 +28,6 @@ const Profile = () => {
 
     useEffect(() => {
         dispatch( traerDatosMedico( {idMedico: user.idMedico} ) )
-    
         return () => {
             dispatch( resetearMedicoAccion() )
         }
@@ -71,7 +71,8 @@ const Profile = () => {
     const handleMedicoFirma = (value) => {
         setMedico({
             ...medico,
-            archivoFirmaDigital: value
+            archivoFirmaDigital: value,
+            usaFirmaAutomatica: true
         })
     }
 
@@ -84,7 +85,7 @@ const Profile = () => {
         Object.keys(medico).forEach(key => {
             if((key === 'nombre' || key === 'apellido') && !sonLetras(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
-            if(medico[key] === '' && key !== 'telefono' && key !== 'archivoDni') 
+            if(medico[key] === '' && key !== 'telefono' && key !== 'archivoDni' && key !== 'archivoFirmaDigital') 
                 newError[key] = 'El campo no debe estar vacio'
         })
         setError(newError)
@@ -155,7 +156,7 @@ const Profile = () => {
                                             label="DNI"
                                             handle={handleInputMedicoChange}
                                             value={medico.dni}
-                                            disabled={!modificar}/>
+                                            disabled/>
                                         </div>
                                         <div className="col-12">
                                             <AppInput 
@@ -171,7 +172,10 @@ const Profile = () => {
                                 <div className="col-5 pl-1 text-center">
                                     {
                                         !medico.archivoDni &&
-                                        <label className="font-weight-bold">Foto DNI</label>
+                                        <label className="m-0 font-weight-bold">
+                                            Foto DNI 
+                                            {   modificar  && <p className="small m-0 text-muted" style={{lineHeight: 1}}>(opcional)</p>    }
+                                        </label>
                                     }
                                     {
                                         medico.archivoDni || modificar ?     
@@ -184,33 +188,72 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className="form-group">
-                                <AppInput 
-                                error={error.matricula}
-                                name="matricula"
-                                label="Matricula"
-                                handle={handleMedicoPhoto}
-                                value={medico.matricula}
-                                disabled={true}/>
+                            <div className={modificar ? 'border p-3':''}>
+                                <div className="form-group">
+                                    <AppInput 
+                                    label="Matricula"
+                                    value={medico.tipoMatricula + " - " +medico.matricula}
+                                    disabled/>
+                                </div>
+                                <div className="">
+                                    <AppInput 
+                                    label="Email"
+                                    value={medico.email}
+                                    disabled/>
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <p>TIPO: <span className="font-weight-bold">{medico.tipoMatricula}</span></p>
-                            </div>
-                            <div className="form-group text-center">
-                                <h4>Configuración</h4>
-                            </div>
-                            <div className="form-group row justify-content-between align-items-center">
-                                <div className="col-6">
+                            {   modificar &&
+                                <span className="font-weight-bold" style={{fontSize: '12px'}}>
+                                    * Si desea modificar su matricula o su email, por favor contáctese con su visitador médico
+                                </span>                           
+                            }
+                            <div className="form-group row justify-content-between align-items-center mt-2">
+                                <div className="col-12 text-center mb-2">
                                     <span className="font-weight-bold">Firma automatica</span>
                                 </div>
-                                <div className="col-6 text-right">
-                                    <Switch
-                                        checked={medico.usaFirmaAutomatica || false}
-                                        onChange={handleInputMedicoChange}
-                                        name="usaFirmaAutomatica"
-                                        disabled={!modificar || state.loading}
-                                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                    />
+                                <div className="col-12 text-right">
+                                    <div className="row">
+                                        <div className="col-6 pr-0">
+                                            {   medico.archivoFirmaDigital ?
+                                                <img src={'data:image/png;base64,' +  (Array.isArray(medico.archivoFirmaDigital) ? convertBinaryToDataURI(medico.archivoFirmaDigital) : medico.archivoFirmaDigital) } className="border w-100" style={{height: '150px'}}/>
+                                                :
+                                                <div className="border w-100 d-flex align-items-center justify-content-center" style={{height:'150px'}}>
+                                                    <span>Sin firma</span>
+                                                </div>
+                                            }        
+                                        </div>
+                                        <div className="col-6 d-flex flex-column justify-content-around">
+                                            {   medico.archivoFirmaDigital ?
+                                                <>
+                                                    <Button 
+                                                    size="small" 
+                                                    color="primary" 
+                                                    variant="outlined"
+                                                    disabled={!modificar}
+                                                    onClick={toggleDialogFirmar}>
+                                                    Editar firma
+                                                    </Button>
+                                                    <Button 
+                                                    size="small" 
+                                                    color="primary" 
+                                                    variant="outlined"
+                                                    disabled={!modificar}
+                                                    onClick={() => setMedico({...medico, archivoFirmaDigital: '', usaFirmaAutomatica: false})}>
+                                                    Borrar firma
+                                                    </Button>
+                                                </>
+                                                :
+                                                <Button 
+                                                size="small" 
+                                                color="primary" 
+                                                variant="outlined"
+                                                disabled={!modificar}
+                                                onClick={toggleDialogFirmar}>
+                                                Agregar firma
+                                                </Button>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="text-center form-group">
@@ -251,7 +294,7 @@ const Profile = () => {
                                         {   state.loading ?
                                             'Guardando...'
                                             :
-                                            'Guardar cambios'
+                                            'Guardar'
                                         }
                                     </Button>
                                 </div>

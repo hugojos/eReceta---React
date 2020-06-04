@@ -27,13 +27,13 @@ const Home = () => {
             </div>
             <div className="row mt-4 justify-content-center">
                 <div className="col-12 col-md-3 d-flex justify-content-center mb-2">
-                    <Link
+                    <Button
                     to="/iniciar-sesion"
-                    component={Button}
+                    component={Link}
                     classes={{
                         label: "h5 m-0 p-2"
                     }}
-                    variant="outlined" size="large" className="text-white border-white">INGRESAR</Link>
+                    variant="outlined" size="large" className="text-white border-white">INGRESAR</Button>
                 </div>
                 <div className="col-12 col-md-3 d-flex justify-content-center mb-2">
                     <Button

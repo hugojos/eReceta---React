@@ -31,7 +31,7 @@ const Header = () => {
         <header style={{backgroundColor: '#0057a4', height:'53px', position:'absolute', width: '100%'}}> 
             <div className="h-100 container pr-1">
                 <div className="d-flex align-items-center justify-content-between h-100">
-                    <div className="col-2 pl- pr-0 text-white d-flex justify-content-start align-items-center" >
+                    <div className="col-2 px-0 text-white d-flex justify-content-start align-items-center" >
                         {   Object.keys(user).length > 0 && 
                             <MenuIcon
                             className="pointer text-white"
@@ -40,22 +40,24 @@ const Header = () => {
                             style={{border:'2px solid', borderRadius:'4px'}} />
                         }
                     </div>
-                    <div className="col-10 col-md- d-flex h-100 pr-0 pl-0">
-                        <div className="col-7 col-md-6 col-sm-6 col-lg-6 text-white d-flex align-items-center justify-content-end pr-2 pr-sm-0 pl-0 pr-md-2 pr-lg-5">
-                                <img src="img/Logo-Trans-Rect.png" style={{width: '110px'}} alt=""/>
-                        </div>
-                        <div className="col-5 col-md-6 col-sm-6 col-lg-6 text-white d-flex align-items-center justify-content-end pr-0 pl-0 mr-md-4" >
-                        {   
-                            Object.keys(user).length > 0 && 
-                            <div className="mt-4 mt-md-3 pt-1 d-flex flex-column align-items-end h-100 pr-1" style={{width:'100%'}}>
-                                 <div className="pr-2 d-flex justify-content-end align-items-center pointer"
-                                 onClick={toggleUserMenu} id="userMenu" >
-                                    <NombreMedico />
-                                    <ArrowDropDownIcon  />
-                                </div>
-                                <UserMenu toggleUserMenu={toggleUserMenu} open={openUserMenu}/>
+                    <div className="col-10 h-100">
+                        <div className="row">
+                            <div className="col-7 col-sm-6 text-white d-flex align-items-center justify-content-end pr-2 pr-sm-0 pl-0 pr-md-2 pr-lg-5">
+                                    <img src="img/Logo-Trans-Rect.png" style={{width: '110px'}} alt=""/>
                             </div>
-                        }
+                            <div className="col-5 col-sm-6 text-white d-flex align-items-center justify-content-end" >
+                            {   
+                                Object.keys(user).length > 0 && 
+                                <>
+                                    <div className="d-flex justify-content-end align-items-center pointer"
+                                    onClick={toggleUserMenu} id="userMenu" >
+                                        <NombreMedico />
+                                        <ArrowDropDownIcon />
+                                    </div>
+                                    <UserMenu toggleUserMenu={toggleUserMenu} open={openUserMenu}/>
+                                </>
+                            }
+                            </div>
                         </div>
                     </div>
                 </div>
