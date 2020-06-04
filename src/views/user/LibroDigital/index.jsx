@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { traerPDFAccion } from '../redux/libroDigitalDuck'
+import { traerPDFAccion } from '../../../redux/libroDigitalDuck'
 import { TextField, InputAdornment, Button, Tooltip } from '@material-ui/core'
 import { ReportProblemOutlined } from '@material-ui/icons';
 

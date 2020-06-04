@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom'
 import { pdfjs } from 'react-pdf';
 import { Document, Page } from 'react-pdf';
 import { Button, Menu, MenuItem,CircularProgress } from '@material-ui/core';
-import DialogEnviarLibroDigital from '../components/DialogEnviarLibroDigital'
-import { resetearAccion } from '../redux/enviarRecetaEmailDuck'
-import { enviarWhatsappAccion } from '../redux/enviarRecetaWppDuck' 
+import DialogEnviarLibroDigital from './components/DialogEnviarLibroDigital'
+import { resetearAccion } from '../../../redux/enviarRecetaEmailDuck'
+import { enviarWhatsappAccion } from '../../../redux/enviarRecetaWppDuck' 
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 import { TextField, Button, Dialog, DialogTitle, Divider, DialogActions, DialogContent, CircularProgress} from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
-import { enviarEmailAccion, resetearAccion } from '../redux/enviarRecetaEmailDuck'
+import { enviarEmailAccion, resetearAccion } from '../../../../redux/enviarRecetaEmailDuck'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 

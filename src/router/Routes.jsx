@@ -12,15 +12,15 @@ const Register = lazy(() => import( /* webpackChunkName:"Register" */ '../views/
 const RecoverPassword = lazy(() => import( /* webpackChunkName:"RecoverPassword" */ '../views/auth/RecoverPassword/index'))
 const NewPassword = lazy(() => import( /* webpackChunkName:"NewPassword" */ '../views/auth/NewPassword/index'))
 const EmailValidation = lazy(() => import( /* webpackChunkName:"EmailValidation" */ '../views/auth/EmailValidation/index'))
-const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '../views/website/NuevaReceta/index'));
-const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/website/Firmar/index'));
-const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/website/Receta/index'))
+const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '../views/user/NuevaReceta/index'));
+const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/user/Firmar/index'));
+const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/user/Receta/index'))
 const Profile = lazy(() => import( /* webpackChunkName:"Profile" */ '../views/user/Profile/index'))
-const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/website/RecetaPaciente/index'))
-const LibroDigital = lazy(() => import( /* webpackChunkName:"LibroDigital" */ '../views/LibroDigital'))
-const LibroDigitalPdf = lazy(() => import( /* webpackChunkName:"LibroDigitalPdf" */ '../views/LibroDigitalPdf'))
-const Medicos = lazy(() => import(/* webpackChunkName: "Medicos" */ '../views/website/Medicos/index'))
-const ModificarMedico = lazy(() => import(/* webpackChunkName: "ModificarMedico" */ '../views/website/ModificarMedico/index'))
+const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/user/RecetaPaciente/index'))
+const LibroDigital = lazy(() => import( /* webpackChunkName:"LibroDigital" */ '../views/user/LibroDigital/index'))
+const LibroDigitalPdf = lazy(() => import( /* webpackChunkName:"LibroDigitalPdf" */ '../views/user/LibroDigitalPdf/index'))
+const Medicos = lazy(() => import(/* webpackChunkName: "Medicos" */ '../views/user/Medicos/index'))
+const ModificarMedico = lazy(() => import(/* webpackChunkName: "ModificarMedico" */ '../views/user/ModificarMedico/index'))
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ '../views/website/Home/index'))
 
 const Routes = () => {

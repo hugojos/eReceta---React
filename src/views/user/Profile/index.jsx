@@ -6,9 +6,9 @@ import { modificarMedicoAccion, traerDatosMedico, resetearMedicoAccion } from '.
 import { modificarUsuarioAccion } from '../../../redux/authDuck'
 import AppInput from '../../../components/AppInput'
 import RegisterPhoto from '../../auth/Register/components/RegisterPhoto'
-import { sonLetras } from '../../../utils/validaciones'
+import { sonLetras, sonNumeros } from '../../../utils/validaciones'
 import ProfileDialogFirma from './components/ProfileDialogFirma'
-import { convertDataURIToBinary, convertBinaryToDataURI } from '../../../utils/convert'
+import { convertBinaryToDataURI } from '../../../utils/convert'
 
 const Profile = () => {
 
@@ -53,9 +53,7 @@ const Profile = () => {
         console.log(value)
         setError({ ...error, [name]: '' })
         if(name === 'usaFirmaAutomatica' && value) toggleDialogFirmar()
-        if((name === 'matricula' || name === 'telefono' || name === 'dni') && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
-        if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
-        if(name === 'matricula' && value.length > 6) value = value.substring(0, 6)
+        if(name === 'telefono' && !sonNumeros(value)) value = value ? value.substring(0, value.length-1) : ''
         setMedico({
             ...medico,
             [name]: value
@@ -85,14 +83,14 @@ const Profile = () => {
         Object.keys(medico).forEach(key => {
             if((key === 'nombre' || key === 'apellido') && !sonLetras(medico[key]))
                 newError[key] = 'El campo debe contener solo letras'
-            if(medico[key] === '' && key !== 'telefono' && key !== 'archivoDni' && key !== 'archivoFirmaDigital') 
+            if(medico[key] == '' && key !== 'telefono' && key !== 'archivoDni' && key !== 'archivoFirmaDigital' && key !== 'usaFirmaAutomatica') 
                 newError[key] = 'El campo no debe estar vacio'
         })
         setError(newError)
         console.log(newError)
         console.log(auxMedico)
         if(!Object.keys(newError).length)
-          dispatch( modificarMedicoAccion( auxMedico ) )
+            dispatch( modificarMedicoAccion( auxMedico ) )
     }
 
     return (
