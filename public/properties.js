@@ -4,5 +4,6 @@ window.properties = {
     ip: "http://t.eReceta.com.ar/servicio-eReceta/eReceta", //test
     version: 'PRO 3.2',
     footer: '© 2020 MBSoft S.A.',
-    dialogConsultasPorWhatsapp: 'Ante cualquier duda o consulta, puede contactarnos a traves de Whatsapp haciendo click en este icono: '
+    dialogConsultasPorWhatsapp: 'Ante cualquier duda o consulta, puede contactarnos a traves de Whatsapp haciendo click en este icono: ',
+    urlVerReceta: 'http://localhost:3000'
 }

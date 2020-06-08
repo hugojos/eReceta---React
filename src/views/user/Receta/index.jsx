@@ -51,7 +51,7 @@ const Receta = (props) => {
         link.click();
     }
 
-    const handleEnviarPorWhatsapp = () => {
+    const getRutaWhatsapp = () => {
         let aux = receta;
         aux.idMedico = user.idMedico
         console.log(aux)
@@ -59,23 +59,11 @@ const Receta = (props) => {
     }
     
     useEffect(() => {
-        if(whatsapp.okResponse.mensaje) {
-            let link = document.createElement('a');
-            let mensaje = 'https://api.whatsapp.com/send?text='
-                mensaje += 'Sr/a. Paciente, puede visualizar su receta accediendo a ' + window.location.origin+ "%2F%23%2Fver-receta%2F" + whatsapp.okResponse.mensaje;
-                mensaje += '%0A%0A'
-                mensaje += 'Para utilizar los cupones con descuento, por favor chequee las farmacias adheridas en https://farmacias.ereceta.com.ar'
-            link.href = mensaje
-            
-            link.target = "_blank"
-            link.click();
-        }  
-        console.log(whatsapp)
-    }, [whatsapp])
-
-    useEffect(() => {
         if(!Object.keys(receta).length) history.push('/nueva-receta')
-        setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
+            setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
+
+        getRutaWhatsapp()
+
         return () => {
             dispatch( resetearAccion() )
         }
@@ -112,16 +100,21 @@ const Receta = (props) => {
                             anchorEl={document.getElementById('compartir')}
                             open={openMenu}>
                                 <MenuItem
-                                onClick={toggleDialogEmail}>Enviar por E-mail
+                                className="text-black"
+                                onClick={toggleDialogEmail}>
+                                    Enviar por E-mail
                                 </MenuItem>
                                 <MenuItem
-                                onClick={handleEnviarPorWhatsapp}>
-                                    Enviar por Whatsapp
-                                    {   whatsapp.loading &&
-                                        <CircularProgress size={15} className="ml-2"/>
-                                    }
+                                disabled={!whatsapp.okResponse}>
+                                    <a href={whatsapp.okResponse} target="_blank" className="text-decoration-none" style={{color: "inherit"}}>
+                                        Enviar por Whatsapp
+                                        {   whatsapp.loading &&
+                                            <CircularProgress size={15} className="ml-2"/>
+                                        }
+                                    </a>
                                 </MenuItem>
                                 <MenuItem
+                                className="text-black"
                                 onClick={handleButtonDownload}>
                                     Descargar
                                 </MenuItem>

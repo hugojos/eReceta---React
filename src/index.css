@@ -13,6 +13,12 @@ header {
   background-size: cover;
 }
 
+footer {
+  background-image:  url('./assets/img/footer-fondo.jpg');
+  background-size: cover;
+  color: #fff;
+}
+
 .bg-resaltado {
   background-color: #c7c7c7!important;
 }
@@ -49,6 +55,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] { -moz-appearance:textfield; }
+
 @media (max-width: 663.95px) {
   .MuiDialog-paperWidthSm.MuiDialog-paperScrollBody {
     max-width: none!important;
@@ -72,4 +79,12 @@ input[type=number] { -moz-appearance:textfield; }
 #interactive video {
   position: absolute;
   z-index: -10;
+}
+
+.text-decoration-none {
+  text-decoration: none!important;
+}
+
+.hover-disabled {
+  pointer-events: none;
 }

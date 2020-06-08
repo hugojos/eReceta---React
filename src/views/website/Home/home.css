@@ -1,0 +1,29 @@
+
+/* font-size del home */
+
+@media (min-width: 578px){
+    .home-desktop-text{
+      font-size: 20px;
+    }
+
+    .home-desktop-eReceta{
+        font-size: 24px;
+    }
+}
+
+  @media (max-width: 578px){
+    .home-mobile-text{
+      font-size: 16px !important;
+    }
+
+    .home-mobile-eReceta{
+        font-size: 20px !important;
+      }
+}
+
+/* iconos home */
+
+.home-icon{
+    height:'30px';
+    width:'30px';
+}

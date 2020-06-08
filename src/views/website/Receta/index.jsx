@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { pdfjs } from 'react-pdf';
-import { Document, Page } from 'react-pdf';
-import { Button, Menu, MenuItem,CircularProgress } from '@material-ui/core';
-import DialogEnviarLibroDigital from './components/DialogEnviarLibroDigital'
+import { pdfjs, Document, Page } from 'react-pdf';
+import { Button, Menu, MenuItem, CircularProgress } from '@material-ui/core';
+import DialogEnviarReceta from './components/DialogEnviarReceta'
+
 import { resetearAccion } from '../../../redux/enviarRecetaEmailDuck'
 import { enviarWhatsappAccion } from '../../../redux/enviarRecetaWppDuck' 
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.1.266/pdf.worker.min.js'
 
-const LibroDigitalPdf = () =>{
+const Receta = (props) => {
 
-    const libroDigitalPdf = useSelector(state => state.libroDigital.archivo)
+    const receta = useSelector(state => state.receta.receta)
     const user = useSelector(state => state.auth.user)
     const whatsapp = useSelector(state => state.enviarRecetaWpp)
 
@@ -27,7 +27,7 @@ const LibroDigitalPdf = () =>{
         totalPages: 1,
         page: 1,        
     })
-
+    
     const toggleDialogEmail = () => {
         setOpenDialogEmail(!openDialogEmail)
         setOpenMenu(false)
@@ -43,25 +43,30 @@ const LibroDigitalPdf = () =>{
 
     const handleButtonDownload = () => {
         setOpenMenu(false)
-        let data = Uint8Array.from(atob(libroDigitalPdf.archivo), c => c.charCodeAt(0));
+        let data = Uint8Array.from(atob(receta.archivo), c => c.charCodeAt(0));
         let blob = new Blob([data], {type: "octet/stream"});
         let link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = "LibroDigital.pdf";
+        link.download = "Receta.pdf";
         link.click();
     }
 
     const handleEnviarPorWhatsapp = () => {
-        let aux = libroDigitalPdf;
+        let aux = receta;
         aux.idMedico = user.idMedico
         console.log(aux)
         dispatch( enviarWhatsappAccion(aux) )
     }
-
+    
     useEffect(() => {
         if(whatsapp.okResponse.mensaje) {
             let link = document.createElement('a');
-            link.href = whatsapp.okResponse.mensaje;
+            let mensaje = 'https://api.whatsapp.com/send?text='
+                mensaje += 'Sr/a. Paciente, puede visualizar su receta accediendo a ' + window.location.origin+ "%2F%23%2Fver-receta%2F" + whatsapp.okResponse.mensaje;
+                mensaje += '%0A%0A'
+                mensaje += 'Para utilizar los cupones con descuento, por favor chequee las farmacias adheridas en https://farmacias.ereceta.com.ar'
+            link.href = mensaje
+            
             link.target = "_blank"
             link.click();
         }  
@@ -69,7 +74,7 @@ const LibroDigitalPdf = () =>{
     }, [whatsapp])
 
     useEffect(() => {
-        if(!Object.keys(libroDigitalPdf).length) history.push('/libroDigital')
+        if(!Object.keys(receta).length) history.push('/nueva-receta')
         setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
         return () => {
             dispatch( resetearAccion() )
@@ -78,7 +83,7 @@ const LibroDigitalPdf = () =>{
 
     return (
         <div className="container h-100">
-            <DialogEnviarLibroDigital open={openDialogEmail} toggle={toggleDialogEmail}/>
+            <DialogEnviarReceta open={openDialogEmail} toggle={toggleDialogEmail}/>
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8 mb-2">
                     <div className="row">
@@ -87,8 +92,8 @@ const LibroDigitalPdf = () =>{
                             size="small"
                             color="primary" 
                             variant="contained"
-                            onClick={() => history.push('/libro-digital')}>
-                                Nueva busqueda por fecha
+                            onClick={() => history.push('/nueva-receta')}>
+                                Nueva receta
                             </Button>
                         </div>
                         <div className="col-6 text-right">
@@ -107,7 +112,7 @@ const LibroDigitalPdf = () =>{
                             anchorEl={document.getElementById('compartir')}
                             open={openMenu}>
                                 <MenuItem
-                                onClick={toggleDialogEmail}>Enviar por email
+                                onClick={toggleDialogEmail}>Enviar por E-mail
                                 </MenuItem>
                                 <MenuItem
                                 onClick={handleEnviarPorWhatsapp}>
@@ -127,7 +132,7 @@ const LibroDigitalPdf = () =>{
                 <div className="col-12 col-lg-8" id="my_pdf_viewer">
                     <div className="border border-dark overflow-hidden" id="canvas_container">
                         <Document
-                        file={'data:application/pdf;base64,'+libroDigitalPdf.archivo}
+                        file={'data:application/pdf;base64,'+receta.archivo}
                         loading={
                             <div className="d-flex flex-column align-items-center justify-content-center py-5">
                                 <CircularProgress />
@@ -176,4 +181,4 @@ const LibroDigitalPdf = () =>{
     )
 }
 
-export default LibroDigitalPdf;
+export default Receta;

@@ -36,10 +36,14 @@ export const enviarWhatsappAccion = (data) => async (dispatch, getState) => {
     })
     await axios.post(window.properties.ip  + '/compartirWhatsapp', data)
     .then(response => {
-        console.log(response)
+        console.log("mensajeWhatsapp", response)
+        let mensaje = 'https://api.whatsapp.com/send?text='
+            mensaje += 'Sr/a. Paciente, puede visualizar su receta accediendo a ' + window.properties.urlVerReceta + "%2F%23%2Fver-receta%2F" + response.data.mensaje;
+            mensaje += '%0A%0A'
+            mensaje += 'Para utilizar los cupones con descuento, por favor chequee las farmacias adheridas en https://farmacias.ereceta.com.ar'
         dispatch({
             type: ENVIAR_WHATSAPP_EXITO,
-            payload: response.data    
+            payload: mensaje    
         })
     })
     .catch(e => {
