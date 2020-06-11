@@ -81,7 +81,7 @@ const Receta = (props) => {
                             color="primary" 
                             variant="contained"
                             onClick={() => history.push('/nueva-receta')}>
-                                Nueva receta
+                                Nueva Busqueda por fecha
                             </Button>
                         </div>
                         <div className="col-6 text-right">
@@ -106,7 +106,7 @@ const Receta = (props) => {
                                 </MenuItem>
                                 <MenuItem
                                 disabled={!whatsapp.okResponse}>
-                                    <a href={whatsapp.okResponse} target="_blank" className="text-decoration-none" style={{color: "inherit"}}>
+                                    <a href={whatsapp.okResponse} target="_blank" rel="noopener noreferrer" className="text-decoration-none" style={{color: "inherit"}}>
                                         Enviar por Whatsapp
                                         {   whatsapp.loading &&
                                             <CircularProgress size={15} className="ml-2"/>

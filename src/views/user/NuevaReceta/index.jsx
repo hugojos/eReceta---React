@@ -51,7 +51,7 @@ const NuevaReceta = () => {
     const handleBuscador = (query) => {
         setBuscador(query)
         setError({...error, medicamentoDtos: ''})
-        if(query.length >= 3) {
+        if(query.length >= 2) {
             dispatch( traerListaMedicamentosAccion(query) )
         } else {
             dispatch( vaciarMedicamentoAccion() )

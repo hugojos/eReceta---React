@@ -88,3 +88,13 @@ input[type=number] { -moz-appearance:textfield; }
 .hover-disabled {
   pointer-events: none;
 }
+
+.link-footer{
+  color:#fff;
+  transition: 0.2s;
+}
+
+.link-footer:hover{
+  text-decoration: none;
+  color: rgb(214, 214, 214);
+}

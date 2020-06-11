@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
+import axios from 'axios';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -15,6 +16,8 @@ const theme = createMuiTheme({
     }
   }
 })
+
+axios.defaults.headers.common.version = window.properties.version;
 
 ReactDOM.render(
   <React.StrictMode>

@@ -42,12 +42,18 @@ const Home = () => {
                             <div className="h-100 d-flex align-items-center home-icon m-0 p-0">
                                 <img className="p-0 w-100" src="./img/icons8-google-play.svg" alt="" />
                             </div>
-                            <p className="h5 pt-2 pr-3 mr-2 pr-sm-2 mr-sm-0">DESCARGAR</p>
+                            <p className="h5 pt-2">DESCARGAR</p>
                         </Button>
                 </div>
             </div>
             <div className="text-center mt-5">
-                <small>@ 2020 MBSoft S.A | POLITICAS DE PRIVACIDAD</small>
+                <small className="d-flex align-items-center justify-content-center flex-column flex-sm-row">
+                    <span className="mb-2 mb-sm-0">{window.properties.footer}</span>
+                    <span className="d-none d-sm-inline ml-2 mr-2">|</span>
+                    <Link className="mb-1 mb-sm-0 home-link" to="/terminos-condiciones">Términos y condiciones</Link>
+                    <span className="d-none d-sm-inline ml-2 mr-2">|</span>
+                    <Link className="home-link" to="/politicas-privacidad">Políticas de privacidad</Link>
+                </small>
             </div>
         </div>
      );

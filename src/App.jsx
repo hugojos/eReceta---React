@@ -18,19 +18,19 @@ function App() {
 
 	const store = generateStore()
 
-	history.listen((location, action) => {
+	const verificarRuta = () => {
 		if( history.location.pathname.includes('ver-receta') || history.location.pathname === '/' ){
 			setMostrar(false)
 		} else {
 			setMostrar(true)
 		}
-	})	
+	}
+
 	useEffect(() => {
-		if( history.location.pathname.includes('ver-receta') || history.location.pathname === '/'){
-			setMostrar(false)
-		} else {
-			setMostrar(true)
-		}
+		history.listen((location, action) => {
+			verificarRuta()
+		})	
+		verificarRuta()
 	}, [])
 
 	return (

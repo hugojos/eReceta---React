@@ -27,3 +27,13 @@
     height:'30px';
     width:'30px';
 }
+
+.home-link{
+  color:white;
+  transition: 0.2s;
+}
+
+.home-link:hover{
+  text-decoration: none;
+  color: rgb(214, 214, 214);
+}

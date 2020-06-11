@@ -22,6 +22,8 @@ const LibroDigitalPdf = lazy(() => import( /* webpackChunkName:"LibroDigitalPdf"
 const Medicos = lazy(() => import(/* webpackChunkName: "Medicos" */ '../views/user/Medicos/index'))
 const ModificarMedico = lazy(() => import(/* webpackChunkName: "ModificarMedico" */ '../views/user/ModificarMedico/index'))
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ '../views/website/Home/index'))
+const TerminosCondiciones = lazy(() => import(/* webpackChunkName: "TerminosCodiciones" */ '../views/website/TerminosCondiciones/index'))
+const PoliticasPrivacidad = lazy(() => import(/* webpackChunkName: "PoliticasPrivacidad" */ '../views/website/PoliticasPrivacidad/index'))
 
 const Routes = () => {
     return ( 
@@ -33,6 +35,8 @@ const Routes = () => {
             <Switch>
                 <Route path='/validar-cupon' component={ValidarCupon} />
                 <Route path='/ver-receta/:nombreArchivo' component={RecetaPaciente}/>
+                <Route path="/terminos-condiciones" component={TerminosCondiciones} />
+                <Route path="/politicas-privacidad" component={PoliticasPrivacidad} />
                 <GuestRoute path="/iniciar-sesion" component={Login} />
                 <GuestRoute path="/registrarse" component={Register} />
                 <GuestRoute path="/recuperar" component={RecoverPassword} />

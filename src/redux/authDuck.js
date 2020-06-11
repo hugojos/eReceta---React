@@ -6,6 +6,8 @@ const data = {
     errorResponse: ''
 }
 
+axios.defaults.headers.common.idMedico = data.user ? data.user.idMedico : ''
+
 const INICIAR_SESION_EXITO = 'INICIAR_SESION_EXITO'
 const INICIAR_SESION_FALLO = 'INICIAR_SESION_FALLO'
 const INICIAR_SESION = 'INICIAR_SESION'

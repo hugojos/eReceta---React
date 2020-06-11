@@ -10,12 +10,24 @@ import { esEmail, sonLetras, sonNumeros } from '../../../utils/validaciones'
 import RegisterDialog from './components/RegisterDialog'
 import AppInput from '../../../components/AppInput'
 import RegisterPhoto from './components/RegisterPhoto'
+import DialogTerminos from './components/DialogTerminos'
+import DialogPoliticas from './components/DialogPoliticas'
 
 const Register = () => {
 
     const dispatch = useDispatch()
 
     const state = useSelector(state => state.register)
+    const [openTerminos, setOpenTerminos] = useState(false)
+    const [openPoliticas, setOpenPoliticas] = useState(false)
+
+    const toggleTerminos = () => {
+        setOpenTerminos(!openTerminos)
+    }
+
+    const togglePoliticas = () => {
+        setOpenPoliticas(!openPoliticas)
+    }
     
     let listaProvincias = useSelector(state => state.register.listaProvincias)
 
@@ -191,7 +203,7 @@ const Register = () => {
                             value={medico.password}
                             type="password"/>      
                         </div>
-                        <div className="form-group text-left">
+                        <div className="form-group text-left mb-3">
                             <AppInput 
                             error={error.confirmPassword}
                             name="confirmPassword"
@@ -200,19 +212,24 @@ const Register = () => {
                             value={medico.confirmPassword}
                             type="password"/>     
                         </div>
+                        <p className="text-left mt-0 mb-3 ml-1 ml-sm-3 ml-md-2 ml-lg-4" style={{fontSize:'14px'}}>
+                            Al registrarme, declaro que soy mayor de edad y acepto los <Link onClick={toggleTerminos}>Términos y condiciones</Link> y las <Link onClick={togglePoliticas}>Políticas de privacidad</Link> de MBSoft S.A.
+                        </p>
                         {   state.errorResponse &&
                             <span className="d-block mb-2 text-error">{state.errorResponse}</span>
                         }
-                        <div className="form-group d-flex justify-content-between">
-                            <Button 
+                        <div className="form-group d-flex justify-content-around">
+                            <Button
+                            className="col-5" 
                             to="/"
                             component={Link}
-                            size="large" 
+                            size="medium" 
                             color="primary" 
                             variant="outlined">
                             Salir
                             </Button>
-                            <Button 
+                            <Button
+                            className="col-5"  
                             size="large" 
                             color="primary" 
                             variant="contained"
@@ -227,6 +244,8 @@ const Register = () => {
                     </Paper>
                 </div>
             </div>
+            <DialogTerminos toggleTerminos={toggleTerminos} open={openTerminos}/>
+            <DialogPoliticas togglePoliticas={togglePoliticas} open={openPoliticas}/>
         </div>
     )
 }

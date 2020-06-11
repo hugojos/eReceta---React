@@ -45,7 +45,19 @@ const TablaMedicamento = ({className}) => {
                                         <DeleteForever color="error"/>
                                     </IconButton>
                                 </TableCell>
-                                <TableCell className="px-1 small" align="left">{medicamento.nombre}</TableCell>
+                                <TableCell className="px-1 small" align="left">
+                                    <div className="p-1 d-flex flex-column justify-content-center" >
+                                        <div className="d-flex align-items-center">
+                                            {medicamento.nombre}
+                                        </div>
+
+                                        <div 
+                                            onClick={ () => togglePosologia(index) }
+                                            className="material-bg-primary px-1 py-1 rounded pointer d-flex align-items-center justify-content-center text-light font-weight-bolder col-6">
+                                            <span title="Escribir posología">POSOLOGÍA</span>
+                                        </div>
+                                    </div>
+                                </TableCell>
                                 <TableCell align="center" className="px-0">
                                     <div className="p-1 d-flex flex-column justify-content-center">
                                         <div className="d-flex justify-content-between mb-1">
@@ -60,11 +72,6 @@ const TablaMedicamento = ({className}) => {
                                             size="small">
                                                 <Add color="primary"/>
                                             </IconButton>
-                                        </div>
-                                        <div 
-                                        onClick={ () => togglePosologia(index) }
-                                        className="material-bg-primary px-1 rounded pointer d-flex align-items-center justify-content-center text-light font-weight-bolder">
-                                            <span title="Escribir posología">POSOLOGÍA</span>
                                         </div>
                                     </div>                       
                                 </TableCell>

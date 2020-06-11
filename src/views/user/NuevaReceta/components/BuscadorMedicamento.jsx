@@ -25,7 +25,7 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
     useEffect(() => {
         let aux = state.acumuladorAjax.find(ajax => JSON.parse(ajax.config.data).nombre === buscador)
         if(aux) {
-            setLista(aux.data.slice(0,5))
+            setLista(aux.data)
         } else {
             setLista([])
             dispatch( vaciarAcumuladorAccion() )
@@ -57,8 +57,8 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
             variant="outlined"
             placeholder="¿Qué medicamento esta buscando?"
             size="small"/>
-            {   buscador.length < 3 &&
-                <span className="text-muted small">Se buscará a partir del tercer caracter ingresado</span>
+            {   buscador.length < 2 &&
+                <span className="text-muted small">Se buscará a partir del segundo caracter ingresado</span>
             }
             <List className="pt-0">
                 {
@@ -68,7 +68,7 @@ const BuscadorMedicamento = ({handleBuscador, error, className, buscador}) => {
                         button 
                         className={"border-bottom flex-column align-items-start py-1 " + (medicamento.lResaltarMedicamento ? "bg-resaltado" : '' )}
                         onClick={ () => agregarMedicamento(medicamento) }>
-                            <p className="m-0 font-weight-bolder small  ">{medicamento.nombre} {medicamento.descuento > 0 && <span>- {medicamento.descuento}% de descuento</span> } </p>
+                            <p className="m-0 font-weight-bolder small  ">{medicamento.nombre} {medicamento.descuento > 0 && <span>- {medicamento.descuento}% dto</span> } </p>
                             <span className="small">{medicamento.formula}</span>
                         </ListItem>
                     ))

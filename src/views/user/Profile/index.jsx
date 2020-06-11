@@ -145,17 +145,8 @@ const Profile = () => {
                                 disabled={!modificar}/>
                             </div>
                             <div className="form-group row">
-                                <div className="col-7 d-flex align-items-center pr-1 text-left">
+                                <div className="col-7 d-flex pr-1 text-left">
                                     <div className="row">
-                                        <div className="col-12 form-group">
-                                            <AppInput 
-                                            error={error.dni}
-                                            name="dni"
-                                            label="DNI"
-                                            handle={handleInputMedicoChange}
-                                            value={medico.dni}
-                                            disabled/>
-                                        </div>
                                         <div className="col-12">
                                             <AppInput 
                                             error={error.telefono}
@@ -186,7 +177,16 @@ const Profile = () => {
                                     }
                                 </div>
                             </div>
-                            <div className={modificar ? 'border p-3':''}>
+                            <div style={ modificar ? {backgroundColor:'rgba(206, 206, 206, 0.151)'} : null } className={modificar ? 'border p-3':''}>
+                            <div className="form-group">
+                                            <AppInput 
+                                            error={error.dni}
+                                            name="dni"
+                                            label="DNI"
+                                            handle={handleInputMedicoChange}
+                                            value={medico.dni}
+                                            disabled/>
+                                        </div>
                                 <div className="form-group">
                                     <AppInput 
                                     label="Matricula"
@@ -202,7 +202,7 @@ const Profile = () => {
                             </div>
                             {   modificar &&
                                 <span className="font-weight-bold" style={{fontSize: '12px'}}>
-                                    * Si desea modificar su matricula o su email, por favor contáctese con su visitador médico
+                                    * Si desea modificar su matricula, dni o email, por favor contáctese con su visitador médico
                                 </span>                           
                             }
                             <div className="form-group row justify-content-between align-items-center mt-2">
