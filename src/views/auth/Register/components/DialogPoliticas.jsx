@@ -1,12 +1,13 @@
-import React from 'react'
-import { IconButton, Dialog, DialogContent, DialogTitle, Divider } from '@material-ui/core'
-import { Close } from '@material-ui/icons'
+import React from 'react';
+import { IconButton, Dialog, DialogContent, DialogTitle, Divider } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
+import PoliticasPrivacidad from '../../../website/PoliticasPrivacidad/index';
 
 const DialogPoliticas = ({togglePoliticas, open}) => {
     return ( 
-        <Dialog 
+        <Dialog
             fullWidth
-            scroll="body"
+            scroll="paper"
             maxWidth="sm"
             open={open} 
             className="m-0">
@@ -23,7 +24,7 @@ const DialogPoliticas = ({togglePoliticas, open}) => {
             </DialogTitle>
             <Divider />
             <DialogContent className="p-2 py-0 text-center">
-                <p className="my-3">Ejemplo de Políticas de privacidad Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, non. Minus veniam fuga dolorum voluptas ducimus quasi delectus provident optio rerum exercitationem quod, quaerat sapiente, at voluptate consectetur libero architecto.</p>
+                <PoliticasPrivacidad className="titulo-mobile" />
             </DialogContent>
             <Divider />
         </Dialog>

@@ -30,9 +30,10 @@ export const validarEmailAccion = (token) => async (dispatch, getState) => {
     dispatch({type: VALIDAR_EMAIL})
     await axios.get(window.properties.ip + '/validar?tokenRecibido='+token)
     .then(response => {
+        console.log(response)
         dispatch({
             type: VALIDAR_EMAIL_EXITO,
-            payload: '¡La cuenta se ha validado correctamente!'
+            payload: '¡La cuenta ' + response.data.email + ' se ha validado correctamente!'
         })
     })
     .catch(e => {

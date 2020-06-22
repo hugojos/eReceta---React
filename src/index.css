@@ -8,17 +8,6 @@ button:focus {
   border: 0!important;
 }
 
-header {
-  background-image: url('./assets/img/download.jpg');
-  background-size: cover;
-}
-
-footer {
-  background-image:  url('./assets/img/footer-fondo.jpg');
-  background-size: cover;
-  color: #fff;
-}
-
 .bg-resaltado {
   background-color: #c7c7c7!important;
 }
@@ -59,6 +48,18 @@ input[type=number] { -moz-appearance:textfield; }
 @media (max-width: 663.95px) {
   .MuiDialog-paperWidthSm.MuiDialog-paperScrollBody {
     max-width: none!important;
+  }
+
+  .titulo-mobile{
+    font-size: 18px !important;
+  }
+
+  .legales-texto-mobile p{
+    font-size: 14px !important;
+  }
+
+  .legales-texto-mobile h3{
+    font-size: 18px !important;
   }
 }
 

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { iniciarSesionAccion } from '../redux/authDuck'
 
-const FormLogin = (props) => {
+const LoginForm = (props) => {
 
     const dispatch = useDispatch()
 
@@ -126,4 +126,4 @@ const FormLogin = (props) => {
     )
 }
 
-export default FormLogin
+export default LoginForm

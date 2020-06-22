@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Paper, CircularProgress, Button, Switch } from '@material-ui/core'
+import { Paper, CircularProgress, Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useSelector, useDispatch } from 'react-redux'
 import { modificarMedicoAccion, traerDatosMedico, resetearMedicoAccion } from '../../../redux/modificarDatosDuck'

@@ -1,14 +1,11 @@
 import React from 'react'
-import { Drawer, List, ListItemText, ListItem, Divider } from '@material-ui/core';
+import { Drawer, List, ListItemText, ListItem } from '@material-ui/core';
 import { Link  } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { cerrarSesionAccion } from '../redux/authDuck'
 import { useHistory } from 'react-router-dom';
 
 const Menu = ({toggleMenu, open}) => {
-
-    const dispatch = useDispatch()
 
     const history = useHistory()
 

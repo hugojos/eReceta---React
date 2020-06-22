@@ -1,6 +1,6 @@
 import React from 'react';
 import { Paper } from '@material-ui/core'
-import FormLogin from '../../../components/FormLogin'
+import LoginForm from '../../../components/LoginForm'
 
 const Login = () => {
 	return (
@@ -14,7 +14,7 @@ const Login = () => {
 						</div>
 					</div>
 					<Paper className="pb-2 pt-4" elevation={3}>
-						<FormLogin />
+						<LoginForm />
 					</Paper>
 				</div>
 			</div>

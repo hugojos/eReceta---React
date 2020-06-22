@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-import { CircularProgress, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Paper, InputLabel, Select, FormHelperText } from '@material-ui/core'
+import { CircularProgress, Button, FormControl, Paper, Select } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
-import { traerListaProvinciasAccion, registrarAccion, resetearRegisterAccion } from '../../../redux/registerDuck'
-
+import { traerListaProvinciasAccion, resetearRegisterAccion } from '../../../redux/registerDuck'
+import Checkbox from '@material-ui/core/Checkbox'
 import { esEmail, sonLetras, sonNumeros } from '../../../utils/validaciones'
 
 import RegisterDialog from './components/RegisterDialog'
@@ -12,6 +12,7 @@ import AppInput from '../../../components/AppInput'
 import RegisterPhoto from './components/RegisterPhoto'
 import DialogTerminos from './components/DialogTerminos'
 import DialogPoliticas from './components/DialogPoliticas'
+import DialogAceptarRegistro from './components/DialogAceptarRegistro'
 
 const Register = () => {
 
@@ -20,6 +21,12 @@ const Register = () => {
     const state = useSelector(state => state.register)
     const [openTerminos, setOpenTerminos] = useState(false)
     const [openPoliticas, setOpenPoliticas] = useState(false)
+    const [aceptaPoliticas, setAceptaPoliticas] = useState(true)
+    const [openAceptarRegistro, setOpenAceptarRegistro] = useState(false)
+
+    const aceptarPoliticasTerminos = () => {
+        setAceptaPoliticas(!aceptaPoliticas)
+    }
 
     const toggleTerminos = () => {
         setOpenTerminos(!openTerminos)
@@ -27,6 +34,10 @@ const Register = () => {
 
     const togglePoliticas = () => {
         setOpenPoliticas(!openPoliticas)
+    }
+
+    const toggleAceptarRegistro = () => {
+        setOpenAceptarRegistro(!openAceptarRegistro)
     }
     
     let listaProvincias = useSelector(state => state.register.listaProvincias)
@@ -99,7 +110,7 @@ const Register = () => {
         console.log(newError)
         console.log(auxMedico)
         if(!Object.keys(newError).length)
-           dispatch( registrarAccion( auxMedico ) )
+           toggleAceptarRegistro()
     }
 
     return (
@@ -213,6 +224,11 @@ const Register = () => {
                             type="password"/>     
                         </div>
                         <p className="text-left mt-0 mb-3 ml-1 ml-sm-3 ml-md-2 ml-lg-4" style={{fontSize:'14px'}}>
+                            <Checkbox
+                            onChange={aceptarPoliticasTerminos}
+                            className="my-0 ml-0 mr-1 p-0"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}/>
                             Al registrarme, declaro que soy mayor de edad y acepto los <Link onClick={toggleTerminos}>Términos y condiciones</Link> y las <Link onClick={togglePoliticas}>Políticas de privacidad</Link> de MBSoft S.A.
                         </p>
                         {   state.errorResponse &&
@@ -237,7 +253,8 @@ const Register = () => {
                                 state.loading &&
                                 <CircularProgress size={20} color="inherit"/>
                             }
-                            onClick={validate}>
+                            onClick={validate}
+                            disabled={aceptaPoliticas}>
                             Registrarse
                             </Button>
                         </div>
@@ -246,6 +263,7 @@ const Register = () => {
             </div>
             <DialogTerminos toggleTerminos={toggleTerminos} open={openTerminos}/>
             <DialogPoliticas togglePoliticas={togglePoliticas} open={openPoliticas}/>
+            <DialogAceptarRegistro toggleAceptarRegistro={toggleAceptarRegistro} open={openAceptarRegistro} medico={medico} />
         </div>
     )
 }

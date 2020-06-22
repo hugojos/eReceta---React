@@ -25,7 +25,7 @@ const AppInput = ({handle, name, error, label, value, type, disabled, placeholde
         label={label || ''}
         variant="outlined" 
         size="small" 
-        value={value || ''}
+        value={value}
         type={type || 'text'}/>
     )
 }

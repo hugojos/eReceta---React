@@ -46,7 +46,7 @@ const Home = () => {
                         </Button>
                 </div>
             </div>
-            <div className="text-center mt-5">
+            <div className="text-center mt-2 mt-md-5">
                 <small className="d-flex align-items-center justify-content-center flex-column flex-sm-row">
                     <span className="mb-2 mb-sm-0">{window.properties.footer}</span>
                     <span className="d-none d-sm-inline ml-2 mr-2">|</span>

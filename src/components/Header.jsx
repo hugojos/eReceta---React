@@ -9,6 +9,16 @@ import { Link, useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 const Header = () => {
+
+    const styles = {
+        height: '53px',
+        width: '100%',
+        position: 'absolute',
+        backgroundImage: "url('./img/download.jpg')",
+        backgroundSize: "cover",
+        backgroundColor: "#0057a4",
+    }
+
     const location = useLocation()
     const history = useHistory()
 
@@ -31,7 +41,7 @@ const Header = () => {
     }
 
     return (
-        <header style={{backgroundColor: '#0057a4', height:'53px', position:'absolute', width: '100%'}}> 
+        <header style={styles}> 
             <div className="h-100 container pr-1">
                 <div className="d-flex align-items-center justify-content-between h-100">
                     <div className="col-2 px-0 text-white d-flex justify-content-start align-items-center" >

@@ -4,46 +4,51 @@ import { FormControl, Select } from '@material-ui/core'
 
 import AppInput from '../../../../components/AppInput'
 
-const MedicosFiltro = () => {
+const MedicosFiltro = ({handle}) => {
+
     return (
         <>
             <div className="row align-items-center">
-                <Columna label="DNI: " placeholder="INGRESE DNI"/>
-                <Columna label="Nombre y apellido: " placeholder="INGRESE NOMBRE Y/O APELLIDO"/>
-                <Columna label="Email: " placeholder="INGRESE EMAIL"/>
+                <ColumnaInput name="dni" handle={handle} label="DNI: " placeholder="INGRESE DNI"/>
+                <ColumnaInput name="nombre" handle={handle} label="Nombre: " placeholder="INGRESE NOMBRE"/>
+                <ColumnaInput name="apellido" handle={handle} label="Apellido: " placeholder="INGRESE APELLIDO"/>
+                <ColumnaInput name="email" handle={handle} label="Email: " placeholder="INGRESE EMAIL"/>
             </div>
             <div className="row align-items-center">
-                <div className="col-md-4 col-12">
+                <div className="col-md-3 col-12">
                     <div className="row align-items-center">
-                        <div className="col-12 col-md-3">
+                        <div className="col-12">
                             <span className="font-weight-bold mr-2">Tipo matricula:</span>
                         </div>
-                        <div className="col-12 col-md-9">
+                        <div className="col-12">
                             <FormControl variant="outlined" fullWidth size="small">
                                 <Select
+                                onChange={handle}
                                 native
-                                name="obraSocial">
-                                    <option value="" selected>Nacional</option>
-                                    <option value="">Provincial</option>
+                                name="tipoMatricula">
+                                    <option value="NACIONAL">Nacional</option>
+                                    <option value="PROVINCIAL">Provincial</option>
                                 </Select>
                             </FormControl> 
                         </div>
                     </div>
                 </div>
-                <Columna label="Matricula: " placeholder="INGRESE MATRICULA"/>
-                <div className="col-md-4 col-12">
+                <ColumnaInput name="matricula" handle={handle} label="Matricula: " placeholder="INGRESE MATRICULA"/>
+                <ColumnaInput name="telefono" handle={handle} label="Telefono: " placeholder="INGRESE TELEFONO"/>
+                <div className="col-md-3 col-12">
                     <div className="row align-items-center">
-                        <div className="col-12 col-md-3">
+                        <div className="col-12">
                             <span className="font-weight-bold mr-2">Estado:</span>
                         </div>
-                        <div className="col-12 col-md-9">    
+                        <div className="col-12">    
                             <FormControl variant="outlined" fullWidth size="small">
                                 <Select
+                                onChange={handle}
                                 native
-                                name="obraSocial">
-                                    <option value="" selected>Todo</option>
-                                    <option value="">Habilitado</option>
-                                    <option value="">Inhabilitado</option>
+                                name="estado">
+                                    <option value="TODOS">Todo</option>
+                                    <option value="HABILITADO">Habilitado</option>
+                                    <option value="INHABILITADO">Inhabilitado</option>
                                 </Select>
                             </FormControl> 
                         </div>
@@ -54,19 +59,21 @@ const MedicosFiltro = () => {
      );
 }
 
-const Columna = ({label, name, placeholder}) => (
-    <div className="col-md-4 col-12">
+const ColumnaInput = ({label, name, placeholder, handle}) => (
+    <div className="col-md-3 col-12 mb-2">
         <div className="row align-items-center">
-            <div className="col-12 col-md-3">
-                <span className="font-weight-bold mr-2">{label}</span>
+            <div className="col-12">
+                <span className="font-weight-bold">{label}</span>
             </div>
-            <div className="col-12 col-md-9">    
-                <AppInput 
+            <div className="col-12">    
+                <AppInput
+                handle={handle}
                 name={name}
                 placeholder={placeholder}/>
             </div>
         </div>
     </div>
 )
+
 
 export default MedicosFiltro;

@@ -24,7 +24,7 @@ const EmailValidation = () => {
         if(!state.loading) {
             setTimeout(() => {
                 history.push('/iniciar-sesion')
-            }, 6000)
+            }, 10000)
         }
     }, [state])
 
@@ -43,7 +43,7 @@ const EmailValidation = () => {
                         </div>
                         :
                         <div className="d-flex justify-content-center flex-column align-items-center my-2">
-                            <p className={'h5 my-2 ' + ( state.okResponse  ? 'text-success' : 'text-error')}>{state.okResponse || state.errorResponse}</p>
+                            <p className={'h5 my-2 text-center ' + ( state.okResponse  ? 'text-success' : 'text-error')}>{state.okResponse || state.errorResponse}</p>
                             <small className="text-muted">Si no es redireccionado haga click <Link to="/iniciar-sesion">aquí.</Link> </small>
                         </div>
                     }

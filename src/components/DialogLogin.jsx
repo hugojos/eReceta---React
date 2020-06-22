@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconButton, Dialog, DialogContent, DialogTitle, Divider } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import FormLogin from './FormLogin'
+import LoginForm from './LoginForm'
 
 const DialogLogin = (props) => {
 
@@ -27,7 +27,7 @@ const DialogLogin = (props) => {
             <Divider />
             <DialogContent className="p-2 py-0 text-center">
                 <h4 className="my-3">Inicie sesión para continuar</h4>
-                <FormLogin />
+                <LoginForm />
             </DialogContent>
             <Divider />
         </Dialog>

@@ -50,7 +50,8 @@ const Routes = () => {
                 <PrivateRoute path="/libro-digital-pdf" component={LibroDigitalPdf} />
                 <PrivateRoute path="/medicos" component={Medicos} />
                 <PrivateRoute path="/modificar-medico" component={ModificarMedico}/>
-                <Route path='/' component={Home}/>
+                <Route path='/' component={Home} exact/>
+                <Redirect from="/" to="/"/>
             </Switch>
         </Suspense> 
     );

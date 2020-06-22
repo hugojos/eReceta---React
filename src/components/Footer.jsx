@@ -4,9 +4,18 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
 
+    const styles = {
+        height: '45px',
+        bottom: 0,
+        backgroundImage: "url('./img/footer-fondo.jpg')",
+        backgroundSize: "cover",
+        backgroundColor: "#0057a4",
+        color: '#fff'
+    }
+
     return (
         <footer className="position-fixed text-center w-100 d-flex flex-column align-items-center justify-content-center"
-        style={{bottom: 0, height:'45px'}}>
+        style={styles}>
             <div>
                 <span>{window.properties.footer}</span>
             </div>

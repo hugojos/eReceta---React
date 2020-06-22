@@ -20,6 +20,9 @@ const BotonWhatsapp = () => {
             setURL(response.data.mensaje)
             console.log(response)
         })
+        .catch(error => {
+            console.dir(error)
+        })
         if(localStorage.getItem('dialogWhatsapp'))
             setPosition({
                 right: '7px',

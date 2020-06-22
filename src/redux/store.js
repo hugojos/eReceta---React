@@ -12,6 +12,7 @@ import enviarRecetaEmailReducer from './enviarRecetaEmailDuck'
 import enviarRecetaWppReducer from './enviarRecetaWppDuck'
 import modificarDatosReducer from './modificarDatosDuck'
 import libroDigitalReducer from './libroDigitalDuck'
+import medicosReducer from './medicosDuck'
 
 const rootReducer = combineReducers({
     auth: authReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     enviarRecetaEmail: enviarRecetaEmailReducer,
     enviarRecetaWpp: enviarRecetaWppReducer,
     modificarDatos: modificarDatosReducer,
-    libroDigital: libroDigitalReducer
+    libroDigital: libroDigitalReducer,
+    medicos: medicosReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

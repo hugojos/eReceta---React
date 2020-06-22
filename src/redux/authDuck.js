@@ -26,7 +26,6 @@ export default function reducer(state = data, action){
         case MODIFICAR_USUARIO:
             return {...state, user: action.payload}
         case CERRAR_SESION:
-            localStorage.removeItem('auth')
             return {...state, user: false, loading: false}
         default:
             return state
@@ -40,12 +39,14 @@ export const iniciarSesionAccion = (user) => async (dispatch, getState) => {
     })  
     await axios.post(window.properties.ip +'/login', user)
             .then(response => {
+                let expiry = new Date().getTime() + window.properties.tiempoSesion //12 horas
+                response.data.expiry = expiry;
                 localStorage.setItem('auth', JSON.stringify(response.data))
                 dispatch({
                     type: INICIAR_SESION_EXITO, 
                     payload: response.data
                 })
-                //if(Object.keys(getState().receta.pacienteDto).length) history.push('/receta')
+                
             })  
             .catch(e => {
                 if(e.response && e.response.status === 404) {
@@ -78,6 +79,7 @@ export const modificarUsuarioAccion = (data) => async (dispatch, getState) => {
 }
 
 export const cerrarSesionAccion = () => async (dispatch, getState) => {
+    localStorage.removeItem('auth')
     dispatch({
         type: CERRAR_SESION
     })

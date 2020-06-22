@@ -2,8 +2,8 @@ import React from 'react';
 
 const TerminosCondiciones = () => {
     return ( 
-        <div className="container text-muted text-break">
-            <h1 className="h3 text-dark">Términos y condiciones de uso del Sitio</h1>
+        <div className="container text-left text-muted text-break legales-texto-mobile">
+            <h1 className="h3 text-dark titulo-mobile">Términos y condiciones de uso del Sitio</h1>
             <p>
             Versión vigente 10/06/2020
             </p>

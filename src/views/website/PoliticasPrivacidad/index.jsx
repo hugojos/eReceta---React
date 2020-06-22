@@ -2,8 +2,8 @@ import React from 'react';
 
 const PoliticasPrivacidad = () => {
     return (
-        <div className="container text-muted text-break">
-            <h1 className="h3 text-dark">Políticas de privacidad y confidencialidad de la información</h1>
+        <div className="container text-left text-muted text-break legales-texto-mobile">
+            <h1 className="h3 text-dark titulo-mobile">Políticas de privacidad y confidencialidad de la información</h1>
             <p>
             Última modificación 10/06/2020
             </p>

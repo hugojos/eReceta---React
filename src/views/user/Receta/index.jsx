@@ -61,9 +61,7 @@ const Receta = (props) => {
     useEffect(() => {
         if(!Object.keys(receta).length) history.push('/nueva-receta')
             setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
-
         getRutaWhatsapp()
-
         return () => {
             dispatch( resetearAccion() )
         }
@@ -81,7 +79,7 @@ const Receta = (props) => {
                             color="primary" 
                             variant="contained"
                             onClick={() => history.push('/nueva-receta')}>
-                                Nueva Busqueda por fecha
+                                Nueva receta
                             </Button>
                         </div>
                         <div className="col-6 text-right">
