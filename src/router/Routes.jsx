@@ -12,7 +12,7 @@ const Register = lazy(() => import( /* webpackChunkName:"Register" */ '../views/
 const RecoverPassword = lazy(() => import( /* webpackChunkName:"RecoverPassword" */ '../views/auth/RecoverPassword/index'))
 const NewPassword = lazy(() => import( /* webpackChunkName:"NewPassword" */ '../views/auth/NewPassword/index'))
 const EmailValidation = lazy(() => import( /* webpackChunkName:"EmailValidation" */ '../views/auth/EmailValidation/index'))
-const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '../views/user/NuevaReceta/index'));
+const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '@/views/user/NuevaReceta/index'));
 const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/user/Firmar/index'));
 const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/user/Receta/index'))
 const Profile = lazy(() => import( /* webpackChunkName:"Profile" */ '../views/user/Profile/index'))

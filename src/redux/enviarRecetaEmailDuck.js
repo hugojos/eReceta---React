@@ -9,7 +9,7 @@ const data = {
 const ENVIAR_EMAIL = 'ENVIAR_EMAIL'
 const ENVIAR_EMAIL_EXITO = 'ENVIAR_EMAIL_EXITO'
 const ENVIAR_EMAIL_FALLO = 'ENVIAR_EMAIL_FALLO'
-const RESETEAR_ENVIAR_RECETA = 'RESETEAR_ENVIAR_RESETA'
+const RESETEAR_ENVIAR_RECETA = 'RESETEAR_ENVIAR_RECETA'
 
 //reducer
 export default function reducer(state = data, action){

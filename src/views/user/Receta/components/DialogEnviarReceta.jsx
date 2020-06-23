@@ -5,6 +5,7 @@ import { Alert } from '@material-ui/lab'
 import { enviarEmailAccion, resetearAccion } from '../../../../redux/enviarRecetaEmailDuck'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { esEmail } from '@/utils/validaciones'
 
 const DialogEnviarEmail = (props) => {
 
@@ -25,14 +26,12 @@ const DialogEnviarEmail = (props) => {
     }, [state])
 
     const validate = () => {
-        let isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let newError = ''
-        if(!isEmail.test(email)) newError = 'El email es invalido'
+        if(!esEmail(email)) newError = 'El email es invalido'
         if(!email.length) newError = 'El campo no debe estar vacio'
         setError(newError)
         if(!newError.length) {
             receta.email = email
-            console.log(receta)
             dispatch( enviarEmailAccion(receta) )
         }
     }

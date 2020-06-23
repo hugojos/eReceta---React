@@ -1,16 +1,17 @@
-import React, {useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { pdfjs, Document, Page } from 'react-pdf';
 import { Button, Menu, MenuItem, CircularProgress } from '@material-ui/core';
 import DialogEnviarReceta from './components/DialogEnviarReceta'
+import DialogWhatsappNumero from './components/DialogWhatsappNumero'
 
-import { resetearAccion } from '../../../redux/enviarRecetaEmailDuck'
-import { enviarWhatsappAccion } from '../../../redux/enviarRecetaWppDuck' 
+import { resetearAccion } from '@/redux/enviarRecetaEmailDuck'
+import { enviarWhatsappAccion } from '@/redux/enviarRecetaWppDuck' 
 
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.1.266/pdf.worker.min.js'
 
-const Receta = (props) => {
+const Receta = () => {
 
     const receta = useSelector(state => state.receta.receta)
     const user = useSelector(state => state.auth.user)
@@ -20,16 +21,23 @@ const Receta = (props) => {
 
     const dispatch = useDispatch()
 
-    const [openMenu, setOpenMenu] = React.useState(false)
-    const [openDialogEmail, setOpenDialogEmail] = React.useState(false)
-    const [widthContainer, setWidtchContainer] = React.useState(0)
-    const [state, setState] = React.useState({
+    const [openMenu, setOpenMenu] = useState(false)
+    const [openDialogEmail, setOpenDialogEmail] = useState(false)
+    const [openDialogWhastapp, setOpenDialogWhatsapp] =  useState(false)
+    const [widthContainer, setWidthContainer] = useState(0)
+    const [urlWhatsapp, setUrlWhatsapp] = useState('')
+    const [state, setState] = useState({
         totalPages: 1,
         page: 1,        
     })
     
     const toggleDialogEmail = () => {
         setOpenDialogEmail(!openDialogEmail)
+        setOpenMenu(false)
+    }
+
+    const toggleDialogWhatsapp = () => {
+        setOpenDialogWhatsapp(!openDialogWhastapp)
         setOpenMenu(false)
     }
 
@@ -60,16 +68,29 @@ const Receta = (props) => {
     
     useEffect(() => {
         if(!Object.keys(receta).length) history.push('/nueva-receta')
-            setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
+
+        setWidthContainer(document.getElementById('canvas_container').offsetWidth)
+
         getRutaWhatsapp()
         return () => {
             dispatch( resetearAccion() )
         }
     },[])
 
+    useEffect(() => {
+        if(whatsapp.okResponse) {
+            let mensaje = 'https://api.whatsapp.com/send?text='
+            mensaje += 'Sr/a. Paciente, puede visualizar su receta accediendo a ' + window.properties.urlVerReceta + "%2F%23%2Fver-receta%2F" + whatsapp.okResponse;
+            mensaje += '%0A%0A'
+            mensaje += 'Para utilizar los cupones con descuento, por favor chequee las farmacias adheridas en https://farmacias.ereceta.com.ar'
+            setUrlWhatsapp(mensaje)
+        }
+    },[whatsapp.okResponse])
+
     return (
         <div className="container h-100">
             <DialogEnviarReceta open={openDialogEmail} toggle={toggleDialogEmail}/>
+            <DialogWhatsappNumero open={openDialogWhastapp} toggle={toggleDialogWhatsapp}/>
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8 mb-2">
                     <div className="row">
@@ -100,11 +121,11 @@ const Receta = (props) => {
                                 <MenuItem
                                 className="text-black"
                                 onClick={toggleDialogEmail}>
-                                    Por E-mail
+                                    Por e-mail
                                 </MenuItem>
                                 <MenuItem
                                 disabled={!whatsapp.okResponse}>
-                                    <a href={whatsapp.okResponse} target="_blank" rel="noopener noreferrer" className="text-decoration-none" style={{color: "inherit"}}>
+                                    <a href={urlWhatsapp} target="_blank" rel="noopener noreferrer" className="text-decoration-none" style={{color: "inherit"}}>
                                         Por Whatsapp a contacto
                                         {   whatsapp.loading &&
                                             <CircularProgress size={15} className="ml-2"/>
@@ -112,13 +133,12 @@ const Receta = (props) => {
                                     </a>
                                 </MenuItem>
                                 <MenuItem
-                                disabled={!whatsapp.okResponse}>
-                                    <a href={whatsapp.okResponse} target="_blank" rel="noopener noreferrer" className="text-decoration-none" style={{color: "inherit"}}>
-                                        Por Whatsapp a numero
-                                        {   whatsapp.loading &&
-                                            <CircularProgress size={15} className="ml-2"/>
-                                        }
-                                    </a>
+                                disabled={!whatsapp.okResponse}
+                                onClick={toggleDialogWhatsapp}>
+                                    Por Whatsapp a numero
+                                    {   whatsapp.loading &&
+                                        <CircularProgress size={15} className="ml-2"/>
+                                    }
                                 </MenuItem>
                                 <MenuItem
                                 className="text-black"
