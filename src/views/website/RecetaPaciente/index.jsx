@@ -2,8 +2,6 @@ import React, { useState,useEffect } from 'react'
 import { pdfjs } from 'react-pdf';
 import { Document, Page } from 'react-pdf';
 import { Button, CircularProgress } from '@material-ui/core';
-import axios from 'axios';
-
 
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.1.266/pdf.worker.min.js'
 
@@ -11,7 +9,7 @@ const Receta = (props) => {
 
     const [widthContainer, setWidtchContainer] = useState(0)
 
-    const [urlPdf, setUrlPdf] = useState('')
+    const [nombrePdf, setNombrePdf] = useState('')
 
     const [state, setState] = useState({
         totalPages: 1,
@@ -25,20 +23,10 @@ const Receta = (props) => {
         if(newState.page > newState.totalPages) newState.page = newState.totalPages
         setState({...newState}) 
     }
-
-    const handleButtonDownload = () => {
-        let link = document.createElement('a');
-        link.href = urlPdf;
-        link.click();
-    }
     
     useEffect(() => {
-        axios.post(window.properties.ip + '/compartirWhatsappRuta')
-        .then(response => {
-            let { nombreArchivo } = props.match.params
-            setUrlPdf( response.data.mensaje + nombreArchivo + '.pdf') // Se encarnga de armar la url para buscar el archivo pdf
-        })
-        //if(!Object.keys(receta).length) history.push('/nueva-receta')
+        let { nombreArchivo } = props.match.params
+        setNombrePdf(nombreArchivo + '.pdf')
         setWidtchContainer(document.getElementById('canvas_container').offsetWidth)
     },[props.match.params])
 
@@ -73,7 +61,7 @@ const Receta = (props) => {
                 <div className="col-12 col-lg-8" id="my_pdf_viewer">
                     <div className="border border-dark overflow-hidden" id="canvas_container">
                         <Document
-                        file={urlPdf}
+                        file={ './recetas/'+nombrePdf }
                         loading={
                             <div className="d-flex flex-column align-items-center justify-content-center py-5">
                                 <CircularProgress />
@@ -95,12 +83,13 @@ const Receta = (props) => {
                     </div>
                 </div>
                 <div className="my-3 col-12 d-flex justify-content-center">
-                    <Button
-                    onClick={handleButtonDownload}
-                    variant="contained"
-                    color="primary">
-                        Descargar receta
-                    </Button>
+                    <a href={'./recetas/' + nombrePdf} download>
+                        <Button
+                        variant="contained"
+                        color="primary">
+                            Descargar receta
+                        </Button>
+                    </a>
                 </div>
             </div>
         </div>

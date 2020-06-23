@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { TextField, Button, Dialog, DialogTitle, Divider, DialogActions, DialogContent, CircularProgress} from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { enviarEmailAccion, resetearAccion } from '../../../../redux/enviarRecetaEmailDuck'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
 
 const DialogEnviarEmail = (props) => {
 
@@ -16,8 +15,8 @@ const DialogEnviarEmail = (props) => {
     let receta = useSelector(state => state.receta.receta)
     const state = useSelector(state => state.enviarRecetaEmail)
     
-    const [email, setEmail] = React.useState('')
-    const [error, setError] = React.useState('')
+    const [email, setEmail] = useState('')
+    const [error, setError] = useState('')
 
     useEffect(() => {
         if(state.okResponse.length > 0) {

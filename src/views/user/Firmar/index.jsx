@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SignatureCanvas from 'react-signature-canvas'
 import { Button, CircularProgress } from '@material-ui/core'
 import { Alert } from '@material-ui/lab';
@@ -20,8 +20,8 @@ const Firmar = () => {
 
     let data = useSelector(state => state.receta)
 
-    const [openDialogFirmaVacia, setOpenDialogFirmaVacia] = React.useState(false)
-    const [openDialogLogin, setOpenDialogLogin] = React.useState(false)
+    const [openDialogFirmaVacia, setOpenDialogFirmaVacia] = useState(false)
+    const [openDialogLogin, setOpenDialogLogin] = useState(false)
 
     useEffect(() => {
         if(Object.keys(user).length && !optionsPad.isEmpty()) {

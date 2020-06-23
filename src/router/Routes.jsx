@@ -16,7 +16,7 @@ const NuevaReceta = lazy(() => import( /* webpackChunkName:"NuevaReceta" */ '../
 const Firmar = lazy(() => import( /* webpackChunkName:"Firmar" */ '../views/user/Firmar/index'));
 const Receta = lazy(() => import( /* webpackChunkName:"Receta" */ '../views/user/Receta/index'))
 const Profile = lazy(() => import( /* webpackChunkName:"Profile" */ '../views/user/Profile/index'))
-const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/user/RecetaPaciente/index'))
+const RecetaPaciente = lazy(() => import( /* webpackChunkName:"RecetaPaciente" */ '../views/website/RecetaPaciente/index'))
 const LibroDigital = lazy(() => import( /* webpackChunkName:"LibroDigital" */ '../views/user/LibroDigital/index'))
 const LibroDigitalPdf = lazy(() => import( /* webpackChunkName:"LibroDigitalPdf" */ '../views/user/LibroDigitalPdf/index'))
 const Medicos = lazy(() => import(/* webpackChunkName: "Medicos" */ '../views/user/Medicos/index'))

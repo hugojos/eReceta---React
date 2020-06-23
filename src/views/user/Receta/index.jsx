@@ -100,12 +100,21 @@ const Receta = (props) => {
                                 <MenuItem
                                 className="text-black"
                                 onClick={toggleDialogEmail}>
-                                    Enviar por E-mail
+                                    Por E-mail
                                 </MenuItem>
                                 <MenuItem
                                 disabled={!whatsapp.okResponse}>
                                     <a href={whatsapp.okResponse} target="_blank" rel="noopener noreferrer" className="text-decoration-none" style={{color: "inherit"}}>
-                                        Enviar por Whatsapp
+                                        Por Whatsapp a contacto
+                                        {   whatsapp.loading &&
+                                            <CircularProgress size={15} className="ml-2"/>
+                                        }
+                                    </a>
+                                </MenuItem>
+                                <MenuItem
+                                disabled={!whatsapp.okResponse}>
+                                    <a href={whatsapp.okResponse} target="_blank" rel="noopener noreferrer" className="text-decoration-none" style={{color: "inherit"}}>
+                                        Por Whatsapp a numero
                                         {   whatsapp.loading &&
                                             <CircularProgress size={15} className="ml-2"/>
                                         }
