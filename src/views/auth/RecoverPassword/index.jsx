@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Paper, TextField, Button, CircularProgress, InputAdornment, Tooltip } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { ReportProblemOutlined } from '@material-ui/icons' 
 import { useSelector, useDispatch } from 'react-redux'
-import { enviarLinkAccion } from '../../../redux/recoverPasswordDuck'
+import { enviarLinkAccion, resetearAccion } from '@/redux/recoverPasswordDuck'
 import { useHistory } from 'react-router-dom'
+
+import { esEmail } from '@/utils/validaciones'
 
 const RecoverPassword = () => {
 
@@ -21,15 +23,19 @@ const RecoverPassword = () => {
     const validate = () => {
         setErrorEmail('')
         let newErrorEmail = ''
-        let isEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         
-        if(!isEmail.test(email)) newErrorEmail = 'El email es invalido'
+        if(!esEmail(email)) newErrorEmail = 'El email es invalido'
         if(!email.length) newErrorEmail = 'El email no debe estar vacio'
         if(!newErrorEmail.length)
             dispatch( enviarLinkAccion(email) )
-
         setErrorEmail(newErrorEmail)
     }
+
+    useEffect(() => {
+        return () => {
+            dispatch( resetearAccion() )
+        }
+    }, [])
 
     return (
         <div className="container h-100">

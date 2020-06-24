@@ -10,6 +10,7 @@ const ENVIAR_LINK = 'ENVIAR_LINK'
 const ENVIAR_LINK_EXITO = 'ENVIAR_LINK_EXITO'
 const ENVIAR_LINK_FALLO = 'ENVIAR_LINK_FALLO'
 const COMPROBAR_TOKEN = 'COMPROMBAR_TOKEN'
+const RESETEAR_RECOVER_PASSWORD = 'RESETEAR_RECOVER_PASSWORD'
 
 //reducer
 export default function reducer(state = data, action){
@@ -22,6 +23,8 @@ export default function reducer(state = data, action){
             return {...state, enviado: false, errorResponse: action.payload, loading: false}
         case COMPROBAR_TOKEN:
             return {...state, user: false, loading: false}
+        case RESETEAR_RECOVER_PASSWORD:
+            return {enviado: false, errorResponse: false, loading: false}
         default:
             return state
     }
@@ -43,5 +46,11 @@ export const enviarLinkAccion = (email) => async (dispatch, getState) => {
             type: ENVIAR_LINK_FALLO,
             error: 'No se pudo continuar con el proceso ' + e.message
         })
+    })
+}
+
+export const resetearAccion = () => (dispatch, getState) => {
+    dispatch({
+        type: RESETEAR_RECOVER_PASSWORD
     })
 }
