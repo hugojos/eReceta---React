@@ -1,0 +1,21 @@
+#filtro {
+    display: block;
+    transition: 3s;
+}
+
+#filtro.is-show {
+    display: none;
+}
+
+#botonFiltrar{
+    transition: 0.6s;
+    background-color: #fff;
+}
+
+#botonFiltrar.activo{
+    background-color: #ccc;
+}
+
+.inputStyle{
+    background-color: #fff !important;
+}

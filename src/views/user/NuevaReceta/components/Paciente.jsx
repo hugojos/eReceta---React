@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, Paper } from '@material-ui/core'
-import AppInput from '../../../../components/AppInput'
+import AppInput from '@/components/AppInput'
 import { useSelector } from 'react-redux'
 
 const Paciente = ({handle, error, paciente}) => {
@@ -15,7 +15,7 @@ const Paciente = ({handle, error, paciente}) => {
                     <div className="form-group row">
                         <div className="col-6 col-md-12 pr-1 pr-md-3 mb-md-3 text-left">
                             <AppInput 
-                            handle={handle}
+                            onChange={handle}
                             name="nombre"
                             error={error.nombre}
                             label="Nombre"
@@ -23,7 +23,7 @@ const Paciente = ({handle, error, paciente}) => {
                         </div>
                         <div className="col-6 col-md-12 pl-1 pl-md-3 text-left">
                             <AppInput 
-                            handle={handle}
+                            onChange={handle}
                             name="apellido"
                             error={error.apellido}
                             label="Apellido"
@@ -32,7 +32,7 @@ const Paciente = ({handle, error, paciente}) => {
                     </div>
                     <div className="form-group text-left">
                         <AppInput 
-                        handle={handle}
+                        onChange={handle}
                         name="dni"
                         error={error.dni}
                         label="DNI (opcional)"
@@ -59,7 +59,7 @@ const Paciente = ({handle, error, paciente}) => {
                     {   paciente.obraSocial &&
                     <div className="form-group text-left">
                         <AppInput 
-                        handle={handle}
+                        onChange={handle}
                         name="numeroAfiliado"
                         error={error.numeroAfiliado}
                         label="N° Afiliado"

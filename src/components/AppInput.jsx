@@ -1,32 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ReportProblemOutlined } from '@material-ui/icons'
 import { TextField, Tooltip, InputAdornment } from '@material-ui/core'
 
-const AppInput = ({handle, name, error, label, value, type, disabled, placeholder}) => {
+const AppInput = (props) => {
     return (
         <TextField
-        disabled={disabled || false}
-        error={!!error}
+        autoComplete="off"
+        {...props}
+        error={!!props.error}
+        style={{backgroundColor:'#fff', borderRadius:'4px'}}
         InputProps={{
             endAdornment: 
-            error &&
+            props.error &&
             <InputAdornment
             position="end">
-                <Tooltip placement="top-end" title={error}>
+                <Tooltip placement="top-end" title={props.error}>
                     <ReportProblemOutlined className="text-danger"/>
                 </Tooltip>
             </InputAdornment>,
         }}
-        onChange={handle}
         fullWidth
-        name={name}
-        placeholder={ placeholder || '' }
-        label={label || ''}
         variant="outlined" 
-        size="small" 
-        value={value}
-        type={type || 'text'}/>
+        size="small" />
     )
 }
 

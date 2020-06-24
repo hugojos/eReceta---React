@@ -58,7 +58,11 @@ export const iniciarSesionAccion = (user) => async (dispatch, getState) => {
                 else if(e.response && e.response.status === 401) {
                     dispatch({
                         type: INICIAR_SESION_FALLO,
-                        payload: 'El usuario aún no ha sido validado con el mail que se le ha enviado'
+                        payload: `
+                        Usuario aún no validado.
+                        Para ingresar a la aplicación, por favor revise el correo electrónico que ha enviado eReceta a su cuenta de email "${user.email}" y
+                        haga click sobre el botón que figura en el cuerpo de dicho mail.
+                        `
                     })
                 } 
                 else {

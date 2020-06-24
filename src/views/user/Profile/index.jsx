@@ -98,7 +98,7 @@ const Profile = () => {
             <ProfileDialogFirma 
             open={openFirmar}
             toggleDialog={toggleDialogFirmar}
-            handle={handleMedicoFirma}/>
+            onChange={handleMedicoFirma}/>
             <div className="row justify-content-center">
                 <div className="col-12 col-md-6">
                     <Paper
@@ -131,7 +131,7 @@ const Profile = () => {
                                 error={error.nombre}
                                 name="nombre"
                                 label="Nombre(s)"
-                                handle={handleInputMedicoChange}
+                                onChange={handleInputMedicoChange}
                                 value={medico.nombre}
                                 disabled={!modificar}/>
                             </div>
@@ -140,7 +140,7 @@ const Profile = () => {
                                 error={error.apellido}
                                 name="apellido"
                                 label="Apellido(s)"
-                                handle={handleInputMedicoChange}
+                                onChange={handleInputMedicoChange}
                                 value={medico.apellido}
                                 disabled={!modificar}/>
                             </div>
@@ -152,7 +152,7 @@ const Profile = () => {
                                             error={error.telefono}
                                             name="telefono"
                                             label="Telefono (opcional)"
-                                            handle={handleInputMedicoChange}
+                                            onChange={handleInputMedicoChange}
                                             value={medico.telefono}
                                             disabled={!modificar}/>
                                         </div>
@@ -170,7 +170,7 @@ const Profile = () => {
                                         medico.archivoDni || modificar ?     
                                         <RegisterPhoto
                                         disabled={!modificar || state.loading}
-                                        handle={handleMedicoPhoto}
+                                        onChange={handleMedicoPhoto}
                                         value={medico.archivoDni} />
                                         :
                                         <div>Sin foto</div>    
@@ -183,7 +183,7 @@ const Profile = () => {
                                             error={error.dni}
                                             name="dni"
                                             label="DNI"
-                                            handle={handleInputMedicoChange}
+                                            onChange={handleInputMedicoChange}
                                             value={medico.dni}
                                             disabled/>
                                         </div>

@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import { traerListaProvinciasAccion, resetearRegisterAccion } from '../../../redux/registerDuck'
 import Checkbox from '@material-ui/core/Checkbox'
-import { esEmail, sonLetras, sonNumeros } from '../../../utils/validaciones'
+import { esEmail, sonLetras, sonNumeros, filtroSoloNumeros } from '../../../utils/validaciones'
 
 import RegisterDialog from './components/RegisterDialog'
-import AppInput from '../../../components/AppInput'
+import AppInput from '@/components/AppInput'
 import RegisterPhoto from './components/RegisterPhoto'
 import DialogTerminos from './components/DialogTerminos'
 import DialogPoliticas from './components/DialogPoliticas'
@@ -75,7 +75,7 @@ const Register = () => {
         let value = event.target.value
         setError({ ...error, [name]: '' })
         if( name === 'idProvincia' ) setError({ ...error, matricula: ''})
-        if((name === 'matricula' || name === 'telefono' || name === 'dni') && !sonNumeros(value)) value = value.substring(0, value.length-1)
+        if(name === 'matricula' || name === 'telefono' || name === 'dni') value = filtroSoloNumeros(value)
         if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
         if(name === 'matricula' && value.length > 6) value = value.substring(0, 6)
         setMedico({
@@ -83,7 +83,6 @@ const Register = () => {
             [name]: value
         })
     }
-
     const handleMedicoPhoto = (value) => {
         setMedico({
             ...medico,
@@ -123,11 +122,11 @@ const Register = () => {
                 <div className="col-12 col-md-8 col-lg-6">
                     <Paper className="mt-2 p-3 w-100 text-center" elevation={3}>
                         <div className="form-group text-left w-100">
-                            <AppInput 
+                            <AppInput
                             error={error.nombre}
                             name="nombre"
                             label="Nombre(s)"
-                            handle={handleInputMedicoChange}
+                            onChange={handleInputMedicoChange}
                             value={medico.nombre}/>
                         </div>
                         <div className="form-group text-left">
@@ -135,7 +134,7 @@ const Register = () => {
                             error={error.apellido}
                             name="apellido"
                             label="Apellido(s)"
-                            handle={handleInputMedicoChange}
+                            onChange={handleInputMedicoChange}
                             value={medico.apellido}/>
                         </div>
                         <div className="form-group row">
@@ -146,7 +145,7 @@ const Register = () => {
                                         error={error.dni}
                                         name="dni"
                                         label="DNI"
-                                        handle={handleInputMedicoChange}
+                                        onChange={handleInputMedicoChange}
                                         value={medico.dni}/>
                                     </div>
                                     <div className="col-12">
@@ -154,7 +153,7 @@ const Register = () => {
                                         error={error.telefono}
                                         name="telefono"
                                         label="Telefono (opcional)"
-                                        handle={handleInputMedicoChange}
+                                        onChange={handleInputMedicoChange}
                                         value={medico.telefono}/>
                                     </div>
                                 </div>
@@ -165,7 +164,7 @@ const Register = () => {
                                     <label className="m-0 font-weight-bold">Foto DNI <p className="small m-0 text-muted" style={{lineHeight: 1}}>(opcional)</p> </label>
                                 }
                                 <RegisterPhoto
-                                handle={handleMedicoPhoto}
+                                onChange={handleMedicoPhoto}
                                 value={medico.archivoDni} />
                             </div>
                         </div>
@@ -193,7 +192,7 @@ const Register = () => {
                                 error={error.matricula}
                                 name="matricula"
                                 label="Matricula"
-                                handle={handleInputMedicoChange}
+                                onChange={handleInputMedicoChange}
                                 value={medico.matricula}/>
                             </div>
                         </div>
@@ -202,7 +201,7 @@ const Register = () => {
                             error={error.email}
                             name="email"
                             label="Email"
-                            handle={handleInputMedicoChange}
+                            onChange={handleInputMedicoChange}
                             value={medico.email}/>
                         </div> 
                         <div className="form-group text-left">
@@ -210,7 +209,7 @@ const Register = () => {
                             error={error.password}
                             name="password"
                             label="Contraseña"
-                            handle={handleInputMedicoChange}
+                            onChange={handleInputMedicoChange}
                             value={medico.password}
                             type="password"/>      
                         </div>
@@ -219,7 +218,7 @@ const Register = () => {
                             error={error.confirmPassword}
                             name="confirmPassword"
                             label="Confirmar contraseña"
-                            handle={handleInputMedicoChange}
+                            onChange={handleInputMedicoChange}
                             value={medico.confirmPassword}
                             type="password"/>     
                         </div>
@@ -237,8 +236,8 @@ const Register = () => {
                         <div className="form-group d-flex justify-content-around">
                             <Button
                             className="col-5" 
-                            to="/"
                             component={Link}
+                            to="/"
                             size="medium" 
                             color="primary" 
                             variant="outlined">

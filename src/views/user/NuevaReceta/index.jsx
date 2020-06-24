@@ -10,7 +10,8 @@ import { traerListaObraSocialAccion, traerListaMedicamentosAccion, vaciarMedicam
 import { agregarPacienteAccion, resetearAccion } from '../../../redux/recetaDuck'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import { generarRecetaAccion } from '../../../redux/recetaDuck'
+import { generarRecetaAccion } from '@/redux/recetaDuck'
+import { sonLetras, filtroSoloNumeros } from '@/utils/validaciones'
 
 const NuevaReceta = () => {
 
@@ -39,7 +40,7 @@ const NuevaReceta = () => {
 	const handleInputPacienteChange = (event) => {
         let name = event.target.name
         let value = event.target.value
-        if(name === 'dni' && !/^[0-9]*$/.test(value)) value = value.substring(0, value.length-1)
+        if(name === 'dni') value = filtroSoloNumeros(value)
         if(name === 'dni' && value.length > 8) value = value.substring(0, 8)
         setPaciente({
 			...paciente,
@@ -65,13 +66,12 @@ const NuevaReceta = () => {
 
     const validate = () => {
         setError({})
-        let onlyLetters = /^[\sA-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[A-Za-zÁÉÍÓÚáéíóúñÑÄËÏÖÜäëïöü]+[\s]*$/
         let newError = {}
         if(paciente.dni.length && !(paciente.dni.length >= 7 && paciente.dni.length <= 8)) newError.dni = 'El DNI debe tener entre 7 y 8 digitos'
         if(paciente.obraSocial.length && !paciente.numeroAfiliado.length) newError.numeroAfiliado = 'El campo no debe estar vacio'
         if(!medicamentoDtos.length) newError.medicamentoDtos = '¡Debe seleccionar al menos un medicamento!'
         Object.keys(paciente).forEach(key => {
-            if((key === 'nombre' || key === 'apellido') && !onlyLetters.test(paciente[key]))
+            if((key === 'nombre' || key === 'apellido') && !sonLetras(paciente[key]))
                 newError[key] = 'El campo debe contener solo letras'
             if(!paciente[key] && key !== 'dni' && key !== 'obraSocial' && key !== 'numeroAfiliado')
                 newError[key] = 'El campo no debe estar vacio'
