@@ -11,6 +11,6 @@ export const convertDataURIToBinary = (dataURI: string): Array<number> => {
     return array;
 }
 
-export const convertBinaryToDataURI = (binary: any) => {
+export const convertBinaryToDataURI = (binary: number[]) => {
     return btoa(String.fromCharCode.apply(null, binary))
 }
